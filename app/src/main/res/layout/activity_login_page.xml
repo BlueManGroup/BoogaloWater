@@ -75,7 +75,17 @@
                     android:textAlignment="center"
                     android:id="@+id/signupText"
                     android:textColor="@color/grey"
-                    android:layout_marginBottom="40dp"/>
+                    android:layout_marginBottom="5dp"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:id="@+id/loginButtonAAU"
+                    android:text="Login with AAU"
+                    android:drawableLeft="@drawable/ic_baseline_person_24"
+                    android:textSize="15sp"
+                    android:layout_marginTop="5dp"
+                    android:backgroundTint="@color/grey"
+                    app:cornerRadius = "30dp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
