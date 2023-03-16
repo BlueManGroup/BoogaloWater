@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuHome"
+        android:icon="@drawable/Home"
+        android:title="@string/Home" />
+    <item
+        android:id="@+id/menuTokens"
+        android:icon="@drawable/Tokens"
+        android:title="@string/Tokens" />
+    <item
+        android:id="@+id/menuTokenDistribution"
+        android:icon="@drawable/TokenDistribution"
+        android:title="@string/TokenDistribution" />
+    <item
+        android:id="@+id/menuUserRights"
+        android:icon="@drawable/UserRights"
+        android:title="@string/UserRights" />
+
+</menu>
