@@ -5,17 +5,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.FormBody;
-import okhttp3.RequestBody;
+import com.example.myloginapp.RequestHandler;
 
-// TODO: create seperate file for handling requests
-//
+
+
 public class LoginPage extends AppCompatActivity {
-
-    OkHttpClient client = new OkHttpClient();
     EditText username;
     EditText password;
     Button loginButton;
@@ -29,12 +23,26 @@ public class LoginPage extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (username.getText().toString().equals("user") && password.getText().toString().equals("1234")) {
+                ReqObj obj = new ReqObj(username.getText().toString(), password.getText().toString());
+                if (RequestHandler.postJson(obj.toString())) {
                     Toast.makeText(LoginPage.this, "Login Successful!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(LoginPage.this, "Login Failed!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    public class ReqObj {
+        String username;
+        String password;
+
+        public ReqObj(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
+        public String toString() {
+            return "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";
+        }
     }
 }
