@@ -1,19 +1,19 @@
 package com.example.myloginapp;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-public class LoginPage extends AppCompatActivity {
+
+import androidx.appcompat.app.AppCompatActivity;
+public class SignUpPage extends AppCompatActivity {
     EditText username;
     EditText password;
     Button loginButton;
     Button loginButtonAAU;
-    Button NotAUserButton;
+    Button AlreadyAUserButton;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,32 +22,29 @@ public class LoginPage extends AppCompatActivity {
         password = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
         loginButtonAAU = findViewById(R.id.loginButtonAAU);
-        NotAUserButton = findViewById(R.id.notAUserButton);
-
+        AlreadyAUserButton = findViewById(R.id.AUserButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (username.getText().toString().equals("user") && password.getText().toString().equals("1234")) {
-                    Toast.makeText(LoginPage.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpPage.this, "Sign Up Successful!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(LoginPage.this, "Login Failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpPage.this, "Sign Up Failed!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        NotAUserButton.setOnClickListener(new View.OnClickListener() {
+        AlreadyAUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setContentView(R.layout.activity_sign_up_page);
+                setContentView(R.layout.activity_login_page);
             }
         });
-
 
         loginButtonAAU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LoginPage.this, "AAU is not developed, yet", Toast.LENGTH_SHORT).show();
-            }
-        });
+                Toast.makeText(SignUpPage.this, "The feature is not implemented, yet", Toast.LENGTH_SHORT).show();
+            }});
     }
 }
