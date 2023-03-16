@@ -24,7 +24,7 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ReqObj obj = new ReqObj(username.getText().toString(), password.getText().toString());
-                if (RequestHandler.postJson(obj.toString())) {
+                if (RequestHandler.postJson(obj)) {
                     Toast.makeText(LoginPage.this, "Login Successful!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(LoginPage.this, "Login Failed!", Toast.LENGTH_SHORT).show();

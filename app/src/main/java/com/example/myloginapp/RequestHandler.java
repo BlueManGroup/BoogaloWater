@@ -12,12 +12,12 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class RequestHandler {
-    private static String url = "10.92.1.36/login";
+    private static String url = "http://10.92.1.36/login";
     public static Object resObj = null;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static final OkHttpClient client = new OkHttpClient();
 
-    public static boolean postJson(String object) {
+    public static boolean postJson(LoginPage.ReqObj object) {
         Gson gson = new Gson();
         String json = gson.toJson(object);
         RequestBody body = RequestBody.create(json, JSON);
