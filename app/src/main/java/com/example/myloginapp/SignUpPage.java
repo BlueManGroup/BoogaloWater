@@ -27,11 +27,7 @@ public class SignUpPage extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (username.getText().toString().equals("user") && password.getText().toString().equals("1234")) {
-                    Toast.makeText(SignUpPage.this, "Sign Up Successful!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(SignUpPage.this, "Sign Up Failed!", Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(SignUpPage.this, "Login Successfully", Toast.LENGTH_SHORT).show();
             }
         });
         AlreadyUserButton.setOnClickListener(new View.OnClickListener() {
