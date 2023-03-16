@@ -1,28 +1,29 @@
 package com.example.myloginapp;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 public class SignUpPage extends AppCompatActivity {
     EditText username;
     EditText password;
     Button loginButton;
     Button loginButtonAAU;
-    Button AlreadyAUserButton;
-    @SuppressLint("MissingInflatedId")
+    Button AlreadyUserButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_page);
+        setContentView(R.layout.activity_sign_up_page);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
-        loginButtonAAU = findViewById(R.id.loginButtonAAU);
-        AlreadyAUserButton = findViewById(R.id.AUserButton);
+        AlreadyUserButton = findViewById(R.id.alreadyUserButton);
+        loginButtonAAU = findViewById(R.id.SignUpButtonAAU);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,14 +34,13 @@ public class SignUpPage extends AppCompatActivity {
                 }
             }
         });
-
-        AlreadyAUserButton.setOnClickListener(new View.OnClickListener() {
+        AlreadyUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setContentView(R.layout.activity_login_page);
+                Intent intent = new Intent(SignUpPage.this, LoginPage.class);
+                startActivity(intent);
             }
         });
-
         loginButtonAAU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

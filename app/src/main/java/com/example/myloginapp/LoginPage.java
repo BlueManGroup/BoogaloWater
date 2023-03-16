@@ -23,7 +23,6 @@ public class LoginPage extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         loginButtonAAU = findViewById(R.id.loginButtonAAU);
         NotAUserButton = findViewById(R.id.notAUserButton);
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,14 +33,13 @@ public class LoginPage extends AppCompatActivity {
                 }
             }
         });
-
         NotAUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setContentView(R.layout.activity_sign_up_page);
+                Intent intent = new Intent(LoginPage.this, SignUpPage.class);
+                startActivity(intent);
             }
         });
-
 
         loginButtonAAU.setOnClickListener(new View.OnClickListener() {
             @Override
