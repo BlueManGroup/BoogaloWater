@@ -38,8 +38,8 @@ public class LoginPage extends AppCompatActivity {
         String password;
 
         public ReqObj(String username, String password) {
-            this.username = username;
             this.password = password;
+            this.username = username;
         }
         public String toString() {
             return "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";

@@ -18,13 +18,13 @@ public class RequestHandler {
     private static final OkHttpClient client = new OkHttpClient();
 
     public static boolean postJson(LoginPage.ReqObj object) {
-        Gson gson = new Gson();
-        String json = gson.toJson(object);
-        RequestBody body = RequestBody.create(json, JSON);
+        System.out.println(object);
+        RequestBody body = RequestBody.create(object.toString(), JSON);
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
                 .build();
+        System.out.println(request);
 
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -33,6 +33,7 @@ public class RequestHandler {
                     String responseBody = response.body().string();
                     Gson gson = new Gson();
                     resObj = gson.fromJson(responseBody, Object.class);
+                    System.out.println(resObj);
                 } else {
                     // Handle unsuccessful response gracefully here
                     System.out.println("Too bad dude, gg");
