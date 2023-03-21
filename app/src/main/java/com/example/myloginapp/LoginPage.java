@@ -36,12 +36,13 @@ public class LoginPage extends AppCompatActivity {
                 ReqObj obj = new ReqObj(username.getText().toString(), password.getText().toString());
                 if (RequestHandler.postJson(obj)) {
                     Toast.makeText(LoginPage.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginPage.this, HomePage.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(LoginPage.this, "Login Failed!", Toast.LENGTH_SHORT).show();
                 }
 
-                Intent intent = new Intent(LoginPage.this, HomePage.class);
-                startActivity(intent);
+
             }
         });
 
@@ -64,6 +65,7 @@ public class LoginPage extends AppCompatActivity {
         });
     }
 
+    //
     public class ReqObj {
         String username;
         String password;
