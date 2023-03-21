@@ -23,16 +23,17 @@ public class LoginPage extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         loginButtonAAU = findViewById(R.id.loginButtonAAU);
         NotAUserButton = findViewById(R.id.notAUserButton);
+
+        // Login Button
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (username.getText().toString().equals("user") && password.getText().toString().equals("1234")) {
-                    Toast.makeText(LoginPage.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(LoginPage.this, "Login Failed!", Toast.LENGTH_SHORT).show();
-                }
+                Intent intent = new Intent(LoginPage.this, HomePage.class);
+                startActivity(intent);
             }
         });
+
+        // Redirect to Sign Up Page
         NotAUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,6 +42,7 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
+        // SSO to AAU Login
         loginButtonAAU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
