@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">MyLoginApp</string>
+    <string name="not_a_user_login">Not A User? Sign Up</string>
+    <string name="login_with_aau">Login with AAU</string>
+    <string name="login">Login</string>
+    <string name="type_your_password">Type your password</string>
+    <string name="type_your_username">Type your username</string>
+    <string name="login1">Login</string>
+    <string name="already_a_user_login">Already a User? Login</string>
+    <string name="sign_up_with_aau">Sign up with AAU</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_up2">Sign Up</string>
+    <string name="home_page">Home Page</string>
 </resources>
