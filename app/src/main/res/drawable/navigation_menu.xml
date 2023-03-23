@@ -3,19 +3,19 @@
 
     <item
         android:id="@+id/menuHome"
-        android:icon="@drawable/Home"
-        android:title="@string/Home" />
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Home" />
     <item
         android:id="@+id/menuTokens"
-        android:icon="@drawable/Tokens"
-        android:title="@string/Tokens" />
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Tokens" />
     <item
         android:id="@+id/menuTokenDistribution"
-        android:icon="@drawable/TokenDistribution"
-        android:title="@string/TokenDistribution" />
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="TokenDistribution" />
     <item
         android:id="@+id/menuUserRights"
-        android:icon="@drawable/UserRights"
-        android:title="@string/UserRights" />
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="UserRights" />
 
 </menu>
