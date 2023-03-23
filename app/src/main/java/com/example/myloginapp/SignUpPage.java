@@ -1,6 +1,9 @@
 package com.example.myloginapp;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.concurrent.Future;
+import java.util.Map;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,12 +11,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+
 public class SignUpPage extends AppCompatActivity {
     EditText username;
     EditText password;
     Button signupButton;
     Button loginButtonAAU;
     Button AlreadyUserButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,17 +30,26 @@ public class SignUpPage extends AppCompatActivity {
         AlreadyUserButton = findViewById(R.id.alreadyUserButton);
         loginButtonAAU = findViewById(R.id.SignUpButtonAAU);
 
+
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 ReqObj obj = new ReqObj(username.getText().toString(), password.getText().toString());
-                if (RequestHandler.postJson(obj, "signup")) {
-                    Toast.makeText(SignUpPage.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
+                Future<Object> res = RequestHandler.postJson(obj, "signup");
+                String token;
+
+                try {
+                    Map<String, Object> resMap = (Map<String, Object>) res.get();
+                    token = (String) resMap.get("token");
+                    System.out.println(token);
                     Intent intent = new Intent(SignUpPage.this, HomePage.class);
                     startActivity(intent);
-                } else {
-                    Toast.makeText(SignUpPage.this, "Registration Failed!", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(SignUpPage.this, "Error while signing up", Toast.LENGTH_SHORT).show();
+                    System.out.println(e);
                 }
+
             }
         });
         AlreadyUserButton.setOnClickListener(new View.OnClickListener() {
