@@ -16,6 +16,9 @@ import java.util.Map;
 
 
 public class LoginPage extends AppCompatActivity {
+
+    TokenManager tokenManager = new TokenManager(this);
+    String token;
     EditText username;
     EditText password;
     Button loginButton;
@@ -31,6 +34,8 @@ public class LoginPage extends AppCompatActivity {
         loginButtonAAU = findViewById(R.id.loginButtonAAU);
         NotAUserButton = findViewById(R.id.notAUserButton);
 
+        
+
         // Login Button
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,13 +43,14 @@ public class LoginPage extends AppCompatActivity {
 
                 ReqObj obj = new ReqObj(username.getText().toString(), password.getText().toString());
                 Future<Object> res = RequestHandler.postJson(obj, "login");
-                String token = null;
+
 
                 try {
                     Map<String, Object> resMap = (Map<String, Object>) res.get();
                     Map<String, Object> dataMap = (Map<String, Object>) resMap.get("data");
                     token = (String) dataMap.get("token");
                     System.out.println(token);
+                    tokenManager.saveJwtToken(token);
 
                     Intent intent = new Intent(LoginPage.this, HomePage.class);
                     startActivity(intent);
@@ -54,7 +60,11 @@ public class LoginPage extends AppCompatActivity {
                 }
 
             }
+
+
         });
+
+
 
         // Redirect to Sign Up Page
         NotAUserButton.setOnClickListener(new View.OnClickListener() {
