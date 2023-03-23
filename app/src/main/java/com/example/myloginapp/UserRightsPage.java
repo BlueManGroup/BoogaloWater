@@ -7,17 +7,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 
-public class HomePage extends AppCompatActivity {
+public class UserRightsPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_user_rights_page);
 
         // Home page layout
-        final DrawerLayout drawerlayout = findViewById(R.id.drawerHomePage);
+        final DrawerLayout drawerlayout = findViewById(R.id.drawerUserRightsPage);
 
         // On Click Menu
-        findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.userRightsImageMenu).setOnClickListener(new View.OnClickListener() {
             // On Click Open Drawer
             @Override
             public void onClick(View view) {
@@ -25,9 +25,9 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        NavigationView navigationView = findViewById(R.id.navigationView);
-        navigationView.setItemIconTintList(null);
 
+        NavigationView navigationView = findViewById(R.id.userRightsNavigationView);
+        navigationView.setItemIconTintList(null);
 
     }
 

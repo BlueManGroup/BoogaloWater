@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerSettingsPage"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsPage">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Here is the toolbar on top -->
+        <LinearLayout
+            android:id="@+id/settingsPageToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/funRed"
+            android:gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal">
+
+            <!-- This is the menu button for navigation menu -->
+            <ImageView
+                android:id="@+id/userRightsImageMenu"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_baseline_menu_24"
+                app:tint="@color/white" />
+
+            <!-- This is the text for Home Page -->
+            <TextView
+                android:id ="@+id/userRightsTextTitle"
+                android:layout_height="match_parent"
+                android:layout_width ="match_parent"
+                android:layout_marginStart ="15dp"
+                android:text="User Rights"
+                android:textColor="@color/white"
+                android:textSize ="35sp"
+                android:gravity ="center"/>
+
+
+
+            <!-- Here is the toolbar on top -->
+            <com.google.android.material.navigation.NavigationView
+                android:id= "@+id/settingsNavigationView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:menu="@menu/navigation_drawer"
+                android:layout_gravity="start"/>
+
+        </LinearLayout>
+
+        <!-- Here is the Card View in the middle -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/my_cardview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/settingsPageToolbar"
+            app:layout_constraintVertical_bias="0.1"
+            app:layout_constraintHorizontal_bias="0.5">
+
+            <!-- Here is the Table in the middle -->
+            <TableLayout
+                android:layout_width="305dp"
+                android:layout_height="200dp"
+                android:padding="16dp">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Column 1" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Column 2" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Row 1, Column 1" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Row 1, Column 2" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Row 2, Column 1" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Row 2, Column 2" />
+                </TableRow>
+            </TableLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
+

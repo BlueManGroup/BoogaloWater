@@ -17,5 +17,4 @@
         android:id="@+id/menuUserRights"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="UserRights" />
-
 </menu>
