@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.myloginapp.RequestHandler;
 
+import java.util.concurrent.Future;
+import java.util.Map;
+
 
 
 public class LoginPage extends AppCompatActivity {
@@ -34,14 +37,21 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View view) {
 
                 ReqObj obj = new ReqObj(username.getText().toString(), password.getText().toString());
-                if (RequestHandler.postJson(obj)) {
-                    Toast.makeText(LoginPage.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                Future<Object> res = RequestHandler.postJson(obj, "login");
+                String token = null;
+
+                try {
+                    Map<String, Object> resMap = (Map<String, Object>) res.get();
+                    Map<String, Object> dataMap = (Map<String, Object>) resMap.get("data");
+                    token = (String) dataMap.get("token");
+                    System.out.println(token);
+
                     Intent intent = new Intent(LoginPage.this, HomePage.class);
                     startActivity(intent);
-                } else {
-                    Toast.makeText(LoginPage.this, "Login Failed!", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(LoginPage.this, "Error while loggin in!", Toast.LENGTH_SHORT).show();
+                    System.out.println(e);
                 }
-
 
             }
         });
@@ -63,19 +73,5 @@ public class LoginPage extends AppCompatActivity {
 
             }
         });
-    }
-
-    //
-    public class ReqObj {
-        String username;
-        String password;
-
-        public ReqObj(String username, String password) {
-            this.password = password;
-            this.username = username;
-        }
-        public String toString() {
-            return "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";
-        }
     }
 }
