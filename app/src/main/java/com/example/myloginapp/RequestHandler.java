@@ -12,14 +12,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class RequestHandler {
-    private static String url = "http://10.92.1.215/";
+    private static String url = "";
     public static Object resObj = null;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static final OkHttpClient client = new OkHttpClient();
 
     public static boolean postJson(ReqObj object, String sublink) {
         System.out.println(object);
-        url = url + sublink;
+        url = "http://10.92.1.215/" + sublink;
         RequestBody body = RequestBody.create(object.toString(), JSON);
         Request request = new Request.Builder()
                 .url(url)
