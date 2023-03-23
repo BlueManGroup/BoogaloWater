@@ -34,7 +34,7 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View view) {
 
                 ReqObj obj = new ReqObj(username.getText().toString(), password.getText().toString());
-                if (RequestHandler.postJson(obj)) {
+                if (RequestHandler.postJson(obj, "login")) {
                     Toast.makeText(LoginPage.this, "Login Successful!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginPage.this, HomePage.class);
                     startActivity(intent);
@@ -63,19 +63,5 @@ public class LoginPage extends AppCompatActivity {
 
             }
         });
-    }
-
-    //
-    public class ReqObj {
-        String username;
-        String password;
-
-        public ReqObj(String username, String password) {
-            this.password = password;
-            this.username = username;
-        }
-        public String toString() {
-            return "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";
-        }
     }
 }

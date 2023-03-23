@@ -11,7 +11,7 @@ import android.widget.Toast;
 public class SignUpPage extends AppCompatActivity {
     EditText username;
     EditText password;
-    Button loginButton;
+    Button signupButton;
     Button loginButtonAAU;
     Button AlreadyUserButton;
     @Override
@@ -20,14 +20,21 @@ public class SignUpPage extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_page);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        loginButton = findViewById(R.id.loginButton);
+        signupButton = findViewById(R.id.signupButton);
         AlreadyUserButton = findViewById(R.id.alreadyUserButton);
         loginButtonAAU = findViewById(R.id.SignUpButtonAAU);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SignUpPage.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                ReqObj obj = new ReqObj(username.getText().toString(), password.getText().toString());
+                if (RequestHandler.postJson(obj, "signup")) {
+                    Toast.makeText(SignUpPage.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SignUpPage.this, HomePage.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(SignUpPage.this, "Registration Failed!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         AlreadyUserButton.setOnClickListener(new View.OnClickListener() {

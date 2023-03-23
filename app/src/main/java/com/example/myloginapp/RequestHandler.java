@@ -12,13 +12,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class RequestHandler {
-    private static String url = "http://10.92.1.36/login";
+    private static String url = "http://10.92.1.215/";
     public static Object resObj = null;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static final OkHttpClient client = new OkHttpClient();
 
-    public static boolean postJson(LoginPage.ReqObj object) {
+    public static boolean postJson(ReqObj object, String sublink) {
         System.out.println(object);
+        url = url + sublink;
         RequestBody body = RequestBody.create(object.toString(), JSON);
         Request request = new Request.Builder()
                 .url(url)
@@ -49,4 +50,6 @@ public class RequestHandler {
         return false;
     }
 }
+
+
 
