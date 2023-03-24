@@ -22,7 +22,7 @@ public class RequestHandler {
 
     public static Future<Object> postJson(ReqObj object, String sublink) {
         isSuccess = false;
-        url = "http://10.92.1.215/" + sublink;
+        url = "http://10.92.1.109/" + sublink;
         RequestBody body = RequestBody.create(object.toString(), JSON);
         Request request = new Request.Builder()
                 .url(url)
