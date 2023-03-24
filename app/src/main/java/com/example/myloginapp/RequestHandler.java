@@ -28,7 +28,7 @@ public class RequestHandler {
                 .url(url)
                 .post(body)
                 .build();
-
+        System.out.println(request);
         CompletableFuture<Object> f = new CompletableFuture<>();
 
         client.newCall(request).enqueue(new Callback() {

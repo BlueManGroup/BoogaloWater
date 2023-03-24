@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 
 public class SignUpPage extends AppCompatActivity {
+    TokenManager tokenManager;
     EditText username;
     EditText password;
     Button signupButton;
@@ -29,6 +30,7 @@ public class SignUpPage extends AppCompatActivity {
         signupButton = findViewById(R.id.signupButton);
         AlreadyUserButton = findViewById(R.id.alreadyUserButton);
         loginButtonAAU = findViewById(R.id.SignUpButtonAAU);
+        tokenManager = new TokenManager(this);
 
 
         signupButton.setOnClickListener(new View.OnClickListener() {
@@ -42,9 +44,11 @@ public class SignUpPage extends AppCompatActivity {
                 try {
                     Map<String, Object> resMap = (Map<String, Object>) res.get();
                     token = (String) resMap.get("token");
-                    System.out.println(token);
+                    if (token == null) throw new Exception("fuck");
+                    tokenManager.saveJwtToken(token);
                     Intent intent = new Intent(SignUpPage.this, HomePage.class);
                     startActivity(intent);
+
                 } catch (Exception e) {
                     Toast.makeText(SignUpPage.this, "Error while signing up", Toast.LENGTH_SHORT).show();
                     System.out.println(e);
