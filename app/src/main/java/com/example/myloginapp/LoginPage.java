@@ -24,6 +24,9 @@ public class LoginPage extends AppCompatActivity {
     Button loginButton;
     Button loginButtonAAU;
     Button NotAUserButton;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +54,8 @@ public class LoginPage extends AppCompatActivity {
                     token = (String) dataMap.get("token");
                     tokenManager.saveJwtToken(token);
 
-                    Intent intent = new Intent(LoginPage.this, HomePage.class);
+                    Intent intent = new Intent(LoginPage.this, UserRightsPage.class);
+                    // Intent intent = new Intent(LoginPage.this, HomePage.class);
                     startActivity(intent);
                 } catch (Exception e) {
                     Toast.makeText(LoginPage.this, "Error while logging in!", Toast.LENGTH_SHORT).show();
