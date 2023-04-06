@@ -1,0 +1,32 @@
+<LinearLayout
+    android:id="@+id/button_group"
+    android:layout_width="60dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+        android:id="@+id/button1"
+        style="@style/ButtonStyle"
+        android:layout_weight="0.5"
+        android:text="Tender"
+        android:textColor="@color/black"
+        android:textSize="25sp"/>
+
+    <Button
+        android:id="@+id/button2"
+        style="@style/ButtonStyle"
+        android:layout_weight="0.5"
+        android:text="Responsible"
+        android:textColor="@color/black"
+        android:textSize="25sp"/>
+
+    <Button
+        android:id="@+id/button3"
+        style="@style/ButtonStyle"
+        android:layout_weight="0.5"
+        android:text="Admin"
+        android:textColor="@color/black"
+        android:textSize="25sp"/>
+
+</LinearLayout>

@@ -12,5 +12,25 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
+    <style name="Theme.MyLoginApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.MyLoginApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.MyLoginApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Button. -->
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="AppNavigationViewStyle" parent="Widget.Design.NavigationView">
+        <item name="headerLayout">@menu/navmenu</item>
+    </style>
+
 </resources>

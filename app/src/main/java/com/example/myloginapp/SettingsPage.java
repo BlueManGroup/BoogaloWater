@@ -11,7 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 
-public class HomePage extends AppCompatActivity {
+public class SettingsPage extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -20,13 +20,13 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_settings_page);
 
 
         /*------------------------Hooks----------------------------------------*/
-        drawerLayout = findViewById(R.id.drawerHomePage);
+        drawerLayout = findViewById(R.id.drawerSettingsPage);
         navigationView = findViewById(R.id.navigationView);
-        toolbar = findViewById(R.id.home_page_toolbar);
+        toolbar = findViewById(R.id.settings_page_toolbar);
         navigationView.setItemIconTintList(null);
 
         /*------------------------Toolbar----------------------------------------*/
@@ -36,7 +36,6 @@ public class HomePage extends AppCompatActivity {
         ActionBarDrawerToggle toggle =  new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
 
         /* INSERT YOUR CODE HERE */
 
