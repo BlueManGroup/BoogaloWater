@@ -35,8 +35,6 @@ public class LoginPage extends AppCompatActivity {
         NotAUserButton = findViewById(R.id.notAUserButton);
         tokenManager = new TokenManager(this);
 
-
-
         // Login Button
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
