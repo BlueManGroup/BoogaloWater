@@ -1,9 +1,6 @@
 package com.example.myloginapp;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.concurrent.Future;
-import java.util.Map;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,49 +8,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-
 public class SignUpPage extends AppCompatActivity {
-    TokenManager tokenManager;
     EditText username;
     EditText password;
-    Button signupButton;
+    Button loginButton;
     Button loginButtonAAU;
     Button AlreadyUserButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        signupButton = findViewById(R.id.signupButton);
+        loginButton = findViewById(R.id.loginButton);
         AlreadyUserButton = findViewById(R.id.alreadyUserButton);
         loginButtonAAU = findViewById(R.id.SignUpButtonAAU);
-        tokenManager = new TokenManager(this);
 
-
-        signupButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                ReqObj obj = new ReqObj(username.getText().toString(), password.getText().toString());
-                Future<Object> res = RequestHandler.postJson(obj, "signup");
-                String token;
-
-                try {
-                    Map<String, Object> resMap = (Map<String, Object>) res.get();
-                    token = (String) resMap.get("token");
-                    if (token == null) throw new Exception("fuck");
-                    tokenManager.saveJwtToken(token);
-                    Intent intent = new Intent(SignUpPage.this, HomePage.class);
-                    startActivity(intent);
-
-                } catch (Exception e) {
-                    Toast.makeText(SignUpPage.this, "Error while signing up", Toast.LENGTH_SHORT).show();
-                    System.out.println(e);
-                }
-
+                Toast.makeText(SignUpPage.this, "Login Successfully", Toast.LENGTH_SHORT).show();
             }
         });
         AlreadyUserButton.setOnClickListener(new View.OnClickListener() {
