@@ -31,14 +31,21 @@ public class UserRightsPage extends AppCompatActivity {
     }
     private void setUpUserRightsModels() {
         // Use RequestHandler to get an array of all usernames and their corresponding role.
-        ReqObj obj = new ReqObj(); // Automatically initializes as the local jwt string.
+        ReqObj obj;
+        try {
+            obj = new ReqObj(); // Automatically initializes as the local jwt string.
+        } catch (Exception e) {
+            System.out.println("Det virker ikke.");
+        }
 
         try {
             // 'res' should contain an array with objects like this: {"username", "role"}, for all users.
             Future<Object> res = RequestHandler.postJson(obj, "director/showall");
-            System.out.println(res.get());
+            //System.out.println(res.get());
 
             Map<String, Object> resMap = (Map<String, Object>) res.get();
+            System.out.println(resMap.get("username"));
+
             String[] usernames = (String[]) resMap.get("username");
             String[] roles = (String[]) resMap.get("role");
 
