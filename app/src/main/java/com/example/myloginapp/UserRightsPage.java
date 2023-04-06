@@ -2,34 +2,44 @@ package com.example.myloginapp;
 
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 
 public class UserRightsPage extends AppCompatActivity {
+
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_rights_page);
 
-        // Home page layout
-        final DrawerLayout drawerlayout = findViewById(R.id.drawerUserRightsPage);
 
-        // On Click Menu
-        findViewById(R.id.userRightsImageMenu).setOnClickListener(new View.OnClickListener() {
-            // On Click Open Drawer
-            @Override
-            public void onClick(View view) {
-                drawerlayout.openDrawer(GravityCompat.START);
-            }
-        });
-
-
-        NavigationView navigationView = findViewById(R.id.userRightsNavigationView);
+        /*------------------------Hooks----------------------------------------*/
+        drawerLayout = findViewById(R.id.userRightsPage);
+        navigationView = findViewById(R.id.navigationView);
+        toolbar = findViewById(R.id.user_rights_page_toolbar);
         navigationView.setItemIconTintList(null);
 
-    }
+        /*------------------------Toolbar----------------------------------------*/
+        setSupportActionBar(toolbar);
 
+        /*------------------------Navigation Drawer Menu----------------------------*/
+        ActionBarDrawerToggle toggle =  new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+
+        /* INSERT YOUR CODE HERE */
+
+    }
 
 }

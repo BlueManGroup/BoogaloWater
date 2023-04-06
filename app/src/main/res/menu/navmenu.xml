@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/menuHome"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="Home" />
+        <item
+            android:id="@+id/menuTokens"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="Tokens" />
+        <item
+            android:id="@+id/menuTokenDistribution"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="TokenDistribution" />
+        <item
+            android:id="@+id/menuUserRights"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="UserRights" />
+    </group>
+</menu>

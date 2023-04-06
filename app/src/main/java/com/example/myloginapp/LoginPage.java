@@ -10,9 +10,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.myloginapp.RequestHandler;
 
+import java.util.concurrent.Future;
+import java.util.Map;
+
 
 
 public class LoginPage extends AppCompatActivity {
+
+    TokenManager tokenManager;
+    String token;
     EditText username;
     EditText password;
     Button loginButton;
@@ -27,6 +33,9 @@ public class LoginPage extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         loginButtonAAU = findViewById(R.id.loginButtonAAU);
         NotAUserButton = findViewById(R.id.notAUserButton);
+        tokenManager = new TokenManager(this);
+
+
 
         // Login Button
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -34,17 +43,27 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View view) {
 
                 ReqObj obj = new ReqObj(username.getText().toString(), password.getText().toString());
-                if (RequestHandler.postJson(obj)) {
-                    Toast.makeText(LoginPage.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                Future<Object> res = RequestHandler.postJson(obj, "login");
+
+                try {
+                    Map<String, Object> resMap = (Map<String, Object>) res.get();
+                    Map<String, Object> dataMap = (Map<String, Object>) resMap.get("data");
+                    token = (String) dataMap.get("token");
+                    tokenManager.saveJwtToken(token);
+
                     Intent intent = new Intent(LoginPage.this, HomePage.class);
                     startActivity(intent);
-                } else {
-                    Toast.makeText(LoginPage.this, "Login Failed!", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(LoginPage.this, "Error while logging in!", Toast.LENGTH_SHORT).show();
+                    System.out.println(e);
                 }
 
-
             }
+
+
         });
+
+
 
         // Redirect to Sign Up Page
         NotAUserButton.setOnClickListener(new View.OnClickListener() {
@@ -63,19 +82,5 @@ public class LoginPage extends AppCompatActivity {
 
             }
         });
-    }
-
-    //
-    public class ReqObj {
-        String username;
-        String password;
-
-        public ReqObj(String username, String password) {
-            this.password = password;
-            this.username = username;
-        }
-        public String toString() {
-            return "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";
-        }
     }
 }
