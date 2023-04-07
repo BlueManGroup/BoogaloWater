@@ -42,7 +42,6 @@ public class RequestHandler {
                 } else {
                     // Handle unsuccessful response gracefully here
                     System.out.println("Too bad dude, gg");
-
                 }
             }
 

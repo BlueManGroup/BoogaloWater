@@ -1,6 +1,7 @@
 package com.example.myloginapp;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.HashMap;
 import java.util.concurrent.Future;
 import java.util.Map;
 
@@ -37,7 +38,11 @@ public class SignUpPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                ReqObj obj = new ReqObj(username.getText().toString(), password.getText().toString());
+                Map<String, String> data = new HashMap<String, String>();
+                data.put("username", username.getText().toString());
+                data.put("password", password.getText().toString());
+                data.put("token", "NULL");
+                ReqObj obj = new ReqObj(data);
                 Future<Object> res = RequestHandler.postJson(obj, "signup");
                 String token;
 
