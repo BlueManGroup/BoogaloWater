@@ -55,7 +55,10 @@ public class LoginPage extends AppCompatActivity {
                     tokenManager.saveJwtToken(token);
                     System.out.println("Token from request: " + token);
 
+
+
                     Intent intent = new Intent(LoginPage.this, HomePage.class);
+
                     System.out.println("Token from storage: " + tokenManager.getJwtToken());
                     startActivity(intent);
                 } catch (Exception e) {
