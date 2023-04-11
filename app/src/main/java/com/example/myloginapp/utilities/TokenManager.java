@@ -1,4 +1,4 @@
-package com.example.myloginapp;
+package com.example.myloginapp.utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,17 +1,21 @@
-package com.example.myloginapp;
+package com.example.myloginapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
 import java.util.concurrent.Future;
 import java.util.Map;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.myloginapp.R;
+import com.example.myloginapp.utilities.TokenManager;
+import com.example.myloginapp.utilities.ReqObj;
+import com.example.myloginapp.utilities.RequestHandler;
 
 
 public class SignUpPage extends AppCompatActivity {

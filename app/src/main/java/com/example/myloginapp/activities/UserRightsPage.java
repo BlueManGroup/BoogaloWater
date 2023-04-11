@@ -1,23 +1,27 @@
-package com.example.myloginapp;
+package com.example.myloginapp.activities;
 
 import android.os.Bundle;
-import android.view.View;
+
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.myloginapp.R;
+import com.example.myloginapp.adapters.URP_RecyclerViewAdapter;
+import com.example.myloginapp.models.UserRightsModel;
+import com.example.myloginapp.utilities.ReqObj;
+import com.example.myloginapp.utilities.RequestHandler;
+import com.example.myloginapp.utilities.TokenManager;
 import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import android.media.session.MediaSession;
-import android.os.Bundle;
+
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.Future;
 
 public class UserRightsPage extends AppCompatActivity {

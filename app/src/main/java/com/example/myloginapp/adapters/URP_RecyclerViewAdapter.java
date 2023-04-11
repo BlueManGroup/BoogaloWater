@@ -1,15 +1,17 @@
-package com.example.myloginapp;
+package com.example.myloginapp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myloginapp.R;
+import com.example.myloginapp.models.UserRightsModel;
 
 import java.util.ArrayList;
 

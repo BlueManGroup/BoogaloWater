@@ -1,4 +1,4 @@
-package com.example.myloginapp;
+package com.example.myloginapp.utilities;
 import java.util.Map;
 
 public class ReqObj {
