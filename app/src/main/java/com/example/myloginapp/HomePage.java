@@ -57,8 +57,6 @@ public class HomePage extends AppCompatActivity {
                 try {
                     String token = tokenManager.getJwtToken().toString();
                     Map<String, String> data = new HashMap<String, String>();
-                    data.put("username", "NULL");
-                    data.put("password", "NULL");
                     data.put("token", tokenManager.getJwtToken());
                     System.out.println(token);
                     ReqObj obj = new ReqObj(data);

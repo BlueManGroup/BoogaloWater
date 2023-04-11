@@ -45,7 +45,6 @@ public class LoginPage extends AppCompatActivity {
                 Map<String, String> data = new HashMap<String, String>();
                 data.put("username", username.getText().toString());
                 data.put("password", password.getText().toString());
-                data.put("token", "NULL");
                 ReqObj obj = new ReqObj(data);
                 Future<Object> res = RequestHandler.postJson(obj, "login");
 

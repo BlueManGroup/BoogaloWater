@@ -7,9 +7,9 @@ public class ReqObj {
     String token;
 
     public ReqObj(Map<String, String> data) {
-        this.username = data.get("username");
-        this.password = data.get("password");
-        this.token = data.get("token");
+        this.username = data.getOrDefault("username", null);
+        this.password = data.getOrDefault("password", null);
+        this.token = data.getOrDefault("token", null);
     }
 
     public String toString() {
