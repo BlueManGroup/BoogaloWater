@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.myloginapp.RequestHandler;
 
+import java.util.HashMap;
 import java.util.concurrent.Future;
 import java.util.Map;
 
@@ -40,7 +41,11 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                ReqObj obj = new ReqObj(username.getText().toString(), password.getText().toString());
+
+                Map<String, String> data = new HashMap<String, String>();
+                data.put("username", username.getText().toString());
+                data.put("password", password.getText().toString());
+                ReqObj obj = new ReqObj(data);
                 Future<Object> res = RequestHandler.postJson(obj, "login");
 
                 try {
@@ -48,8 +53,10 @@ public class LoginPage extends AppCompatActivity {
                     Map<String, Object> dataMap = (Map<String, Object>) resMap.get("data");
                     token = (String) dataMap.get("token");
                     tokenManager.saveJwtToken(token);
+                    System.out.println("Token from request: " + token);
 
                     Intent intent = new Intent(LoginPage.this, HomePage.class);
+                    System.out.println("Token from storage: " + tokenManager.getJwtToken());
                     startActivity(intent);
                 } catch (Exception e) {
                     Toast.makeText(LoginPage.this, "Error while logging in!", Toast.LENGTH_SHORT).show();
