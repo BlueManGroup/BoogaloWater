@@ -35,30 +35,26 @@ public class UserRightsPage extends AppCompatActivity {
     }
     private void setUpUserRightsModels() {
         // Use RequestHandler to get an array of all usernames and their corresponding role.
-        // Nevermind: ReqObj obj = new ReqObj(); // Automatically initializes as the local jwt string.
         tokenManager = new TokenManager(this);
-        String token = tokenManager.getJwtToken().toString();
+
         Map<String, String> data = new HashMap<String, String>();
         data.put("username", "NULL");
         data.put("password", "NULL");
         data.put("token", tokenManager.getJwtToken());
-        ReqObj obj = new ReqObj(data);
-        System.out.println(token);
 
+        ReqObj obj = new ReqObj(data);
 
         try {
-            // 'res' should contain an array with objects like this: {"username", "role"}, for all users.
             Future<Object> res = RequestHandler.postJson(obj, "director/showall");
-            //System.out.println(res.get());
+            Map<String, Object> resMap = (Map<String, Object>) res.get(); // Get the response object from future object. Output: {bool: , data: [{},{},...]}
+            // The response objects 'data'-field contains an array with objects. One for each user
+            // containing the username and the role of the user.
+            // It is unpacked like this:
+            ArrayList<Map<String, Object>> dataMap = (ArrayList<Map<String, Object>>) resMap.get("data"); // Get the array from 'data'-field. Output: [{username: , role: },{},... ]
 
-            Map<String, Object> resMap = (Map<String, Object>) res.get();
-            System.out.println(resMap);
-            ArrayList<Map<String, Object>> dataMap = (ArrayList<Map<String, Object>>) resMap.get("data");
-            System.out.println(resMap + "\n" +  dataMap);
-
-
+            // Goes through the items in dataMap, which is an array of Map-objects, to store
+            // their data in a UserRightsModel, so that it can be used by the recycler view.
             for (Map<String, Object> dataObj : dataMap) {
-                System.out.println("{\"username\":\"" + dataObj.get("username") + "\",\"role\":\"" + dataObj.get("role") + "\"}");
                 userRightsModels.add(new UserRightsModel(dataObj.get("username").toString(), dataObj.get("role").toString()));
             }
 
