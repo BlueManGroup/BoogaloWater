@@ -1,7 +1,9 @@
 package com.example.myloginapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
@@ -10,6 +12,11 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
+import android.widget.Button;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Future;
 
 public class HomePage extends AppCompatActivity {
 
@@ -17,11 +24,16 @@ public class HomePage extends AppCompatActivity {
     NavigationView navigationView;
     Toolbar toolbar;
 
+    Button Redeembutton;
+    TokenManager tokenManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        tokenManager = new TokenManager(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-
+        Redeembutton = findViewById(R.id.redeem);
 
         /*------------------------Hooks----------------------------------------*/
         drawerLayout = findViewById(R.id.drawerHomePage);
@@ -38,7 +50,26 @@ public class HomePage extends AppCompatActivity {
         toggle.syncState();
 
 
-        /* INSERT YOUR CODE HERE */
+        Redeembutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                try {
+                    String token = tokenManager.getJwtToken().toString();
+                    Map<String, String> data = new HashMap<String, String>();
+                    data.put("token", tokenManager.getJwtToken());
+                    System.out.println(token);
+                    ReqObj obj = new ReqObj(data);
+                    Future<Object> res = RequestHandler.postJson(obj, "tokens/redeem");
+                } catch(Exception e) {
+                    Toast.makeText(HomePage.this, "Error redeeming token!", Toast.LENGTH_SHORT).show();
+                    System.out.println(e);
+                }
+            }
+
+
+        });
+
 
     }
 

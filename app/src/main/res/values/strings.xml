@@ -31,5 +31,9 @@
     <string name="menu_slideshow">Slideshow</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="User_rights_page_title">User Rights</string>
+
+    <string name="redeem_drink">Redeem drink</string>
+
 </resources>
