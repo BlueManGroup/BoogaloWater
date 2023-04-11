@@ -49,11 +49,10 @@ public class URP_RecyclerViewAdapter extends RecyclerView.Adapter<URP_RecyclerVi
         return userRightsModels.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         //ImageView imageView; // Will eventually hold the profile picture.
         TextView textView;
         Button button;
-        View.OnClickListener listener;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,12 +60,7 @@ public class URP_RecyclerViewAdapter extends RecyclerView.Adapter<URP_RecyclerVi
             //imageView = itemView.findViewById(R.id.imageView);
             textView = itemView.findViewById(R.id.textView);
             button = itemView.findViewById(R.id.button);
-            button.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            //listener.onButtonClick();
-        }
     }
 }

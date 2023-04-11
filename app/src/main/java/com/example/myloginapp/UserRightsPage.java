@@ -1,5 +1,6 @@
 package com.example.myloginapp;
 
+import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,12 +8,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Future;
 
 
 public class UserRightsPage extends AppCompatActivity {
+    TokenManager tokenManager;
+
     // Array that stores the models that let us show the list of users on the screen.
     ArrayList<UserRightsModel> userRightsModels = new ArrayList<>();
 
@@ -31,12 +35,16 @@ public class UserRightsPage extends AppCompatActivity {
     }
     private void setUpUserRightsModels() {
         // Use RequestHandler to get an array of all usernames and their corresponding role.
-        ReqObj obj;
-        try {
-            obj = new ReqObj(); // Automatically initializes as the local jwt string.
-        } catch (Exception e) {
-            System.out.println("Det virker ikke.");
-        }
+        // Nevermind: ReqObj obj = new ReqObj(); // Automatically initializes as the local jwt string.
+        tokenManager = new TokenManager(this);
+        String token = tokenManager.getJwtToken().toString();
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("username", "NULL");
+        data.put("password", "NULL");
+        data.put("token", tokenManager.getJwtToken());
+        ReqObj obj = new ReqObj(data);
+        System.out.println(token);
+
 
         try {
             // 'res' should contain an array with objects like this: {"username", "role"}, for all users.
@@ -44,15 +52,14 @@ public class UserRightsPage extends AppCompatActivity {
             //System.out.println(res.get());
 
             Map<String, Object> resMap = (Map<String, Object>) res.get();
-            System.out.println(resMap.get("username"));
+            System.out.println(resMap);
+            ArrayList<Map<String, Object>> dataMap = (ArrayList<Map<String, Object>>) resMap.get("data");
+            System.out.println(resMap + "\n" +  dataMap);
 
-            String[] usernames = (String[]) resMap.get("username");
-            String[] roles = (String[]) resMap.get("role");
 
-            for (int i = 0; i < Objects.requireNonNull(usernames).length; i++) {
-                System.out.println("{\"username\":\"" + usernames[i] + "\",\"role\":\"" + roles[i] + "\"}");
-
-                userRightsModels.add(new UserRightsModel(usernames[i], roles[i]));
+            for (Map<String, Object> dataObj : dataMap) {
+                System.out.println("{\"username\":\"" + dataObj.get("username") + "\",\"role\":\"" + dataObj.get("role") + "\"}");
+                userRightsModels.add(new UserRightsModel(dataObj.get("username").toString(), dataObj.get("role").toString()));
             }
 
         } catch (Exception e) {
