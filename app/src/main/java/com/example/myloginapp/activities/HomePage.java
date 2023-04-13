@@ -27,7 +27,7 @@ public class HomePage extends AppCompatActivity {
     NavigationView navigationView;
     Toolbar toolbar;
 
-    Button Redeembutton;
+    // Button Redeembutton;
     TokenManager tokenManager;
 
     @Override
@@ -36,7 +36,7 @@ public class HomePage extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        Redeembutton = findViewById(R.id.redeem);
+        // Redeembutton = findViewById(R.id.redeem);
 
         /*------------------------Hooks----------------------------------------*/
         drawerLayout = findViewById(R.id.drawerHomePage);
@@ -53,7 +53,7 @@ public class HomePage extends AppCompatActivity {
         toggle.syncState();
 
 
-        Redeembutton.setOnClickListener(new View.OnClickListener() {
+        /*Redeembutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -71,7 +71,7 @@ public class HomePage extends AppCompatActivity {
             }
 
 
-        });
+        }); */
 
 
     }
