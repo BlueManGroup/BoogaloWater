@@ -10,7 +10,7 @@
     android:fitsSystemWindows ="true"
     tools:openDrawer="start">
 
-    <!-- Here is the toolbar on top -->
+    <!-- Here is the Navigation View -->
     <com.google.android.material.navigation.NavigationView
 
         android:id= "@+id/navigationView"

@@ -54,6 +54,8 @@ public class SignUpPage extends AppCompatActivity {
                     token = (String) resMap.get("token");
                     if (token == null) throw new Exception("fuck");
                     tokenManager.saveJwtToken(token);
+
+                    Toast.makeText(SignUpPage.this, "You have signed up", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignUpPage.this, HomePage.class);
                     startActivity(intent);
 

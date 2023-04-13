@@ -1,7 +1,9 @@
 package com.example.myloginapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
@@ -12,9 +14,13 @@ import com.example.myloginapp.utilities.ReqObj;
 import com.example.myloginapp.utilities.RequestHandler;
 import com.example.myloginapp.utilities.TokenManager;
 import com.google.android.material.navigation.NavigationView;
+
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,11 +30,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-public class UserRightsPage extends AppCompatActivity {
+
+public class UserRightsPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-    TokenManager tokenManager;
+
+    /*------------------------Buttons for NavMenu----------------------------------------*/
+    Button home;
+    Button tokens;
+    Button tokenDistributions;
+    Button userRights;
 
     // Array that stores the models that let us show the list of users on the screen.
     ArrayList<UserRightsModel> userRightsModels = new ArrayList<>();
@@ -49,12 +61,14 @@ public class UserRightsPage extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         /*------------------------Navigation Drawer Menu----------------------------*/
-        ActionBarDrawerToggle toggle =  new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
 
         /*------------------------Recycler View----------------------------*/
-        RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
+        /*RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
 
         setUpUserRightsModels();
 
@@ -92,9 +106,39 @@ public class UserRightsPage extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(UserRightsPage.this, "Error while loading the user rights page!", Toast.LENGTH_SHORT).show();
             System.out.println(e);
-        }
+        } */
+
+
 
     }
 
+    /*------------------------Navigation Drawer Menu ----------------------------*/
+    @Override
+    /* Makes it possible to close the drawer when clicking on Back Button on Phone instead of
+     * returning to Login Page */
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.menuHome:
+                Toast.makeText(this, "Switching to Home Page", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserRightsPage.this, HomePage.class);
+                startActivity(intent);
+                break;
+            case R.id.menuTokens:
+                break;
+            case R.id.menuTokenDistribution:
+                break;
+            case R.id.menuUserRights:
+        }
+        return true;
+    }
 }
 

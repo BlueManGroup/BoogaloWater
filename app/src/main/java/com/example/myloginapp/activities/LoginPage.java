@@ -59,7 +59,7 @@ public class LoginPage extends AppCompatActivity {
                     System.out.println("Token from request: " + token);
 
 
-
+                    Toast.makeText(LoginPage.this, "You have logged in", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginPage.this, HomePage.class);
 
                     System.out.println("Token from storage: " + tokenManager.getJwtToken());
