@@ -20,5 +20,16 @@
             android:icon="@drawable/ic_baseline_person_24"
             android:title="UserRights"
             />
+<item
+            android:id="@+id/menuUserRights"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="UserRights"
+/>
+        <item
+            android:id="@+id/menuLogs"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="Logs"
+            />
+
     </group>
 </menu>

@@ -11,7 +11,8 @@ import android.widget.Toast;
 import com.example.myloginapp.R;
 import com.example.myloginapp.utilities.RequestHandler;
 import com.example.myloginapp.utilities.TokenManager;
-import com.example.myloginapp.utilities.ReqObj;
+import com.example.myloginapp.models.ReqObj;
+import com.example.myloginapp.models.CurrentUser;
 
 import java.util.HashMap;
 import java.util.concurrent.Future;
@@ -28,6 +29,10 @@ public class LoginPage extends AppCompatActivity {
     Button loginButton;
     Button loginButtonAAU;
     Button NotAUserButton;
+
+    CurrentUser currentUser;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +58,10 @@ public class LoginPage extends AppCompatActivity {
 
                 try {
                     Map<String, Object> resMap = (Map<String, Object>) res.get();
-                    Map<String, Object> dataMap = (Map<String, Object>) resMap.get("data");
+                    Map<String, Object> dataMap = (Map<String, Object>) resMap.get("response");
+
+                    currentUser = new CurrentUser(username.toString(),dataMap.get("role").toString());
+
                     token = (String) dataMap.get("token");
                     tokenManager.saveJwtToken(token);
                     System.out.println("Token from request: " + token);
