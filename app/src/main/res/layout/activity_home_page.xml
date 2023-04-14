@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.HomePage"
     android:fitsSystemWindows ="true"
-    tools:openDrawer="start">
+    >
 
     <!-- Here is the Navigation View -->
     <com.google.android.material.navigation.NavigationView
@@ -49,7 +49,21 @@
                 android:gravity ="center"/>
         </androidx.appcompat.widget.Toolbar>
 
+
+        <Button
+            android:id="@+id/redeemButton"
+            android:layout_width="114dp"
+            android:layout_height="69dp"
+            android:text="Redeem Token"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_page_toolbar"
+            tools:ignore="MissingConstraints" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
 

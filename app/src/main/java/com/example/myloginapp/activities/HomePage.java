@@ -30,14 +30,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-
-    /*------------------------Buttons for NavMenu----------------------------------------*/
-    Button home;
-    Button tokens;
-    Button tokenDistributions;
-    Button userRights;
-
-    // Button Redeembutton;
+    Button Redeembutton;
     TokenManager tokenManager;
 
     @Override
@@ -52,7 +45,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         navigationView = findViewById(R.id.navigationView);
 
         toolbar = findViewById(R.id.home_page_toolbar);
-        // Redeembutton = findViewById(R.id.redeem);
+        Redeembutton = findViewById(R.id.redeemButton);
         navigationView.setItemIconTintList(null);
 
         /*------------------------Toolbar----------------------------------------*/
@@ -66,7 +59,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        /*Redeembutton.setOnClickListener(new View.OnClickListener() {
+        Redeembutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -84,7 +77,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             }
 
 
-        }); */
+        });
 
 
     }

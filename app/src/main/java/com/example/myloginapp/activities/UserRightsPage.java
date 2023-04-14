@@ -36,11 +36,6 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
     NavigationView navigationView;
     Toolbar toolbar;
 
-    /*------------------------Buttons for NavMenu----------------------------------------*/
-    Button home;
-    Button tokens;
-    Button tokenDistributions;
-    Button userRights;
 
     // Array that stores the models that let us show the list of users on the screen.
     ArrayList<UserRightsModel> userRightsModels = new ArrayList<>();
