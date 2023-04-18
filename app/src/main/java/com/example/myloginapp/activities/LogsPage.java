@@ -73,8 +73,7 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
 
         token = tokenManager.getJwtToken();
 
-
-        actions = ["change user rights", "redeem", "distribu
+        
 
 
         Map<String, String> data = new HashMap<String, String>();
