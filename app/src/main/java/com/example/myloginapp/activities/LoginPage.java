@@ -60,6 +60,7 @@ public class LoginPage extends AppCompatActivity {
                     Map<String, Object> resMap = (Map<String, Object>) res.get();
                     Map<String, Object> dataMap = (Map<String, Object>) resMap.get("response");
 
+
                     currentUser = new CurrentUser(username.toString(),dataMap.get("role").toString());
 
                     token = (String) dataMap.get("token");
