@@ -53,7 +53,7 @@ public class LoginPage extends AppCompatActivity {
 
                 try {
                     Map<String, Object> resMap = (Map<String, Object>) res.get();
-                    Map<String, Object> dataMap = (Map<String, Object>) resMap.get("data");
+                    Map<String, Object> dataMap = (Map<String, Object>) resMap.get("response");
                     token = (String) dataMap.get("token");
                     tokenManager.saveJwtToken(token);
                     System.out.println("Token from request: " + token);
