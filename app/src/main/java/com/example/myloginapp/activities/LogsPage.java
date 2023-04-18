@@ -2,44 +2,60 @@ package com.example.myloginapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.myloginapp.R;
-import com.example.myloginapp.models.UserRightsModel;
+import com.example.myloginapp.models.CurrentUser;
+import com.example.myloginapp.models.LogsModel;
+import com.example.myloginapp.utilities.RequestHandler;
+import com.example.myloginapp.utilities.TokenManager;
+import com.example.myloginapp.models.ReqObj;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
-
-public class UserRightsPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class LogsPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
     TokenManager tokenManager;
+    String token;
 
-    // Array that stores the models that let us show the list of users on the screen.
-    ArrayList<UserRightsModel> userRightsModels = new ArrayList<>();
+    String urlStr;
 
+    String[] actions = {"change user rights","redeem","distribute"};
+
+    CurrentUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        tokenManager = new TokenManager(this);
+
+        currentUser = new CurrentUser();
+
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_rights_page);
+        setContentView(R.layout.activity_home_page);
 
         /*------------------------Hooks----------------------------------------*/
-        drawerLayout = findViewById(R.id.userRightsPage);
+        drawerLayout = findViewById(R.id.drawerHomePage);
         navigationView = findViewById(R.id.navigationView);
-        toolbar = findViewById(R.id.user_rights_page_toolbar);
+
+        toolbar = findViewById(R.id.home_page_toolbar);
         navigationView.setItemIconTintList(null);
 
         /*------------------------Toolbar----------------------------------------*/
@@ -52,30 +68,29 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        /*------------------------Recycler View----------------------------*/
-        RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
 
-        setUpUserRightsModels();
+        /*----------------------Get Logs------------------------------------------*/
 
-        URP_RecyclerViewAdapter adapter = new URP_RecyclerViewAdapter(this, userRightsModels);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        token = tokenManager.getJwtToken();
 
-    }
 
-    private void setUpUserRightsModels() {
-        // Use RequestHandler to get an array of all usernames and their corresponding role.
-        tokenManager = new TokenManager(this);
+        actions = ["change user rights", "redeem", "distribu
+
 
         Map<String, String> data = new HashMap<String, String>();
-        data.put("username", "NULL");
-        data.put("password", "NULL");
-        data.put("token", tokenManager.getJwtToken());
-
+        data.put("token", token);
+        data.put("action",actions.toString());
         ReqObj obj = new ReqObj(data);
 
+        if(currentUser.getRole() == "director") {
+            urlStr = "director/log";
+        } else {
+            urlStr = "account/log";
+        }
+
+        Future<Object> res = RequestHandler.postJson(obj,urlStr);
+
         try {
-            Future<Object> res = RequestHandler.postJson(obj, "director/showall");
             Map<String, Object> resMap = (Map<String, Object>) res.get(); // Get the response object from future object. Output: {bool: , data: [{},{},...]}
             // The response objects 'data'-field contains an array with objects. One for each user
             // containing the username and the role of the user.
@@ -85,16 +100,13 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
             // Goes through the items in dataMap, which is an array of Map-objects, to store
             // their data in a UserRightsModel, so that it can be used by the recycler view.
             for (Map<String, Object> dataObj : dataMap) {
-                userRightsModels.add(new UserRightsModel(dataObj.get("username").toString(), dataObj.get("role").toString()));
+                LogsModel.add(new UserRightsModel(dataObj.get("username").toString(), dataObj.get("role").toString()));
             }
 
         } catch (Exception e) {
             Toast.makeText(UserRightsPage.this, "Error while loading the user rights page!", Toast.LENGTH_SHORT).show();
             System.out.println(e);
-        }
-
-
-
+        } */
     }
 
     /*------------------------Navigation Drawer Menu ----------------------------*/
@@ -114,7 +126,7 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
         switch (menuItem.getItemId()) {
             case R.id.menuHome:
                 Toast.makeText(this, "Switching to Home Page", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(UserRightsPage.this, HomePage.class);
+                Intent intent = new Intent(LogsPage.this, HomePage.class);
                 startActivity(intent);
                 break;
             case R.id.menuTokens:
@@ -122,14 +134,17 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
             case R.id.menuTokenDistribution:
                 break;
             case R.id.menuUserRights:
+                Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(LogsPage.this, UserRightsPage.class);
+                startActivity(intent2);
                 break;
             case R.id.menuLogs:
-                Toast.makeText(this, "Switching to Logs Page", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(UserRightsPage.this, LogsPage.class);
-                startActivity(intent2);
                 break;
         }
         return true;
     }
 }
+
+
+
 

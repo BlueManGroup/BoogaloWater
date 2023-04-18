@@ -13,7 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.myloginapp.R;
 import com.example.myloginapp.utilities.RequestHandler;
 import com.example.myloginapp.utilities.TokenManager;
-import com.example.myloginapp.utilities.ReqObj;
+import com.example.myloginapp.models.ReqObj;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.core.view.GravityCompat;
@@ -107,6 +107,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(HomePage.this, UserRightsPage.class);
                 startActivity(intent);
+                break;
+            case R.id.menuLogs:
+                Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(HomePage.this, LogsPage.class);
+                startActivity(intent2);
                 break;
         }
         return true;

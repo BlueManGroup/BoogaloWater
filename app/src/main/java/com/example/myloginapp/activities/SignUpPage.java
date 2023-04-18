@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.myloginapp.R;
 import com.example.myloginapp.utilities.TokenManager;
-import com.example.myloginapp.utilities.ReqObj;
+import com.example.myloginapp.models.ReqObj;
 import com.example.myloginapp.utilities.RequestHandler;
 
 
