@@ -1,5 +1,7 @@
 package com.example.myloginapp.models;
 
+import java.util.Map;
+
 public class LogsModel {
 
     String date;
@@ -8,14 +10,15 @@ public class LogsModel {
     String receiver;
     String role;
 
+    String tokens;
 
-
-    public LogsModel(String date, String action, String initiator, String receiver, String role) {
-        this.date = date;
-        this.action = action;
-        this.initiator = initiator;
-        this.receiver = receiver;
-        this.role = role;
+    public LogsModel(Map<String, String> data) {
+        this.date = data.getOrDefault("date", null);
+        this.action = data.getOrDefault("action", null);
+        this.initiator = data.getOrDefault("initiator", null);;
+        this.receiver = data.getOrDefault("receiver", null);;
+        this.role = data.getOrDefault("role", null);;
+        this.tokens = data.getOrDefault("tokens", null);
     }
 
 
