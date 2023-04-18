@@ -35,12 +35,10 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
     Toolbar toolbar;
     TokenManager tokenManager;
     String token;
-
     String urlStr;
-
     String[] actions = {"change user rights","redeem","distribute"};
-
     CurrentUser currentUser;
+
 
 
     @Override
@@ -96,13 +94,11 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
             // The response objects 'data'-field contains an array with objects. One for each user
             // containing the username and the role of the user.
             // It is unpacked like this:
-            ArrayList<Map<String, Object>> dataMap = (ArrayList<Map<String, Object>>) resMap.get("data"); // Get the array from 'data'-field. Output: [{username: , role: },{},... ]
+            ArrayList<Map<String, Object>> dataMap = (ArrayList<Map<String, Object>>) resMap.get("response"); // Get the array from 'data'-field. Output: [{username: , role: },{},... ]
 
             // Goes through the items in dataMap, which is an array of Map-objects, to store
             // their data in a UserRightsModel, so that it can be used by the recycler view.
-            for (Map<String, Object> dataObj : dataMap) {
-               // logsModel.add(dataMap);
-            }
+
 
         } catch (Exception e) {
             Toast.makeText(LogsPage.this, "Error while loading the user rights page!", Toast.LENGTH_SHORT).show();
