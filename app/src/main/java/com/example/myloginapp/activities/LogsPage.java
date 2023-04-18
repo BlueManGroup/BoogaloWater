@@ -141,6 +141,11 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
                 break;
             case R.id.menuLogs:
                 break;
+            case R.id.menuLogout:
+                Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
+                Intent intent3 = new Intent(LogsPage.this, LoginPage.class);
+                startActivity(intent3);
+                break;
         }
         return true;
     }

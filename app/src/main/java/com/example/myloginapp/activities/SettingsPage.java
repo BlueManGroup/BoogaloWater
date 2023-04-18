@@ -1,8 +1,12 @@
 package com.example.myloginapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
@@ -12,7 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 
-public class SettingsPage extends AppCompatActivity {
+public class SettingsPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -40,6 +44,34 @@ public class SettingsPage extends AppCompatActivity {
 
         /* INSERT YOUR CODE HERE */
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.menuHome:
+                Toast.makeText(this, "Switching to Home Page", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SettingsPage.this, HomePage.class);
+                startActivity(intent);
+                break;
+            case R.id.menuTokens:
+                break;
+            case R.id.menuTokenDistribution:
+                break;
+            case R.id.menuUserRights:
+                break;
+            case R.id.menuLogs:
+                Toast.makeText(this, "Switching to Logs Page", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(SettingsPage.this, LogsPage.class);
+                startActivity(intent2);
+                break;
+            case R.id.menuLogout:
+                Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
+                Intent intent3 = new Intent(SettingsPage.this, LoginPage.class);
+                startActivity(intent3);
+                break;
+        }
+        return true;
     }
 
 }
