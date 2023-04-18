@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.myloginapp.R;
 import com.example.myloginapp.models.CurrentUser;
 import com.example.myloginapp.models.LogsModel;
+import com.example.myloginapp.models.UserRightsModel;
 import com.example.myloginapp.utilities.RequestHandler;
 import com.example.myloginapp.utilities.TokenManager;
 import com.example.myloginapp.models.ReqObj;
@@ -40,6 +41,7 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
     String[] actions = {"change user rights","redeem","distribute"};
 
     CurrentUser currentUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
 
         token = tokenManager.getJwtToken();
 
-        
+
 
 
         Map<String, String> data = new HashMap<String, String>();
@@ -99,13 +101,13 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
             // Goes through the items in dataMap, which is an array of Map-objects, to store
             // their data in a UserRightsModel, so that it can be used by the recycler view.
             for (Map<String, Object> dataObj : dataMap) {
-                LogsModel.add(new UserRightsModel(dataObj.get("username").toString(), dataObj.get("role").toString()));
+               // logsModel.add(dataMap);
             }
 
         } catch (Exception e) {
-            Toast.makeText(UserRightsPage.this, "Error while loading the user rights page!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LogsPage.this, "Error while loading the user rights page!", Toast.LENGTH_SHORT).show();
             System.out.println(e);
-        } */
+        }
     }
 
     /*------------------------Navigation Drawer Menu ----------------------------*/
