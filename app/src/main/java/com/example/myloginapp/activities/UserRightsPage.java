@@ -127,8 +127,6 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
                 Intent intent = new Intent(UserRightsPage.this, HomePage.class);
                 startActivity(intent);
                 break;
-            case R.id.menuTokens:
-                break;
             case R.id.menuTokenDistribution:
                 break;
             case R.id.menuUserRights:
