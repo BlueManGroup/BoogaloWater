@@ -40,6 +40,11 @@
             android:name=".activities.HomePage"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".activities.LogsPage"
+            android:exported="true">
+        </activity>
+
 
     </application>
 

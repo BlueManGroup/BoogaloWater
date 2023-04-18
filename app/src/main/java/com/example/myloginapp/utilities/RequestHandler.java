@@ -1,7 +1,7 @@
 package com.example.myloginapp.utilities;
 import androidx.annotation.NonNull;
 
-import com.example.myloginapp.utilities.ReqObj;
+import com.example.myloginapp.models.ReqObj;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.concurrent.Future;
