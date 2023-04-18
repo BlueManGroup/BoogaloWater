@@ -35,7 +35,7 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-
+    TokenManager tokenManager;
 
     // Array that stores the models that let us show the list of users on the screen.
     ArrayList<UserRightsModel> userRightsModels = new ArrayList<>();
@@ -63,7 +63,7 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
         navigationView.setNavigationItemSelectedListener(this);
 
         /*------------------------Recycler View----------------------------*/
-        /*RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
 
         setUpUserRightsModels();
 
@@ -101,7 +101,7 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
         } catch (Exception e) {
             Toast.makeText(UserRightsPage.this, "Error while loading the user rights page!", Toast.LENGTH_SHORT).show();
             System.out.println(e);
-        } */
+        }
 
 
 
