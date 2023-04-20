@@ -36,4 +36,10 @@
 
     <string name="redeem_drink">Redeem drink</string>
 
+    <string-array name="user_roles" >
+        <item> User </item>
+        <item> Responsible </item>
+        <item> Director </item>
+    </string-array>
+
 </resources>
