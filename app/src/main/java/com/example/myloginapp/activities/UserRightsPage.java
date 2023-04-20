@@ -90,7 +90,8 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
             // The response objects 'data'-field contains an array with objects. One for each user
             // containing the username and the role of the user.
             // It is unpacked like this:
-            ArrayList<Map<String, Object>> dataMap = (ArrayList<Map<String, Object>>) resMap.get("data"); // Get the array from 'data'-field. Output: [{username: , role: },{},... ]
+            System.out.println(resMap);
+            ArrayList<Map<String, Object>> dataMap = (ArrayList<Map<String, Object>>) resMap.get("response"); // Get the array from 'data'-field. Output: [{username: , role: },{},... ]
 
             // Goes through the items in dataMap, which is an array of Map-objects, to store
             // their data in a UserRightsModel, so that it can be used by the recycler view.
