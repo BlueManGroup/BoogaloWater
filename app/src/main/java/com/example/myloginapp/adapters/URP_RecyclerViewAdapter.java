@@ -81,12 +81,55 @@ public class URP_RecyclerViewAdapter extends RecyclerView.Adapter<URP_RecyclerVi
                             switch (menuItem.getItemId()) {
                                 case R.id.rolesResponsible:
                                     System.out.println(username);
+                                    try {
+                                        String token = tokenManager.getJwtToken().toString();
+                                        Map<String, String> data = new HashMap<String, String>();
+                                        data.put("username", username);
+                                        data.put("role", "responsible");
+                                        data.put("token", token);
+
+                                        reqObj = new ReqObj(data);
+                                        Future<Object> res = RequestHandler.postJson(reqObj, "director/updateuserrole");
+
+                                    } catch(Exception e) {
+                                        Toast.makeText(holder.button.getContext(), "¿Esos son reebok o son nike?", Toast.LENGTH_SHORT).show();
+                                        System.out.println(e);
+                                    }
+                                    holder.button.setText("responsible");
                                     return true;
                                 case R.id.rolesUser:
-                                    System.out.println(username);
+                                    try {
+                                        String token = tokenManager.getJwtToken().toString();
+                                        Map<String, String> data = new HashMap<String, String>();
+                                        data.put("username", username);
+                                        data.put("role", "user");
+                                        data.put("token", token);
+
+                                        reqObj = new ReqObj(data);
+                                        Future<Object> res = RequestHandler.postJson(reqObj, "director/updateuserrole");
+
+                                    } catch(Exception e) {
+                                        Toast.makeText(holder.button.getContext(), "¿Esos son reebok o son nike?", Toast.LENGTH_SHORT).show();
+                                        System.out.println(e);
+                                    }
+                                    holder.button.setText("user");
                                     return true;
                                 case R.id.rolesDirector:
-                                    System.out.println(username);
+                                    try {
+                                        String token = tokenManager.getJwtToken().toString();
+                                        Map<String, String> data = new HashMap<String, String>();
+                                        data.put("username", username);
+                                        data.put("role", "director");
+                                        data.put("token", token);
+
+                                        reqObj = new ReqObj(data);
+                                        Future<Object> res = RequestHandler.postJson(reqObj, "director/updateuserrole");
+
+                                    } catch(Exception e) {
+                                        Toast.makeText(holder.button.getContext(), "¿Esos son reebok o son nike?", Toast.LENGTH_SHORT).show();
+                                        System.out.println(e);
+                                    }
+                                    holder.button.setText("director");
                                     return true;
                                 default:
                                     return false;
@@ -97,24 +140,8 @@ public class URP_RecyclerViewAdapter extends RecyclerView.Adapter<URP_RecyclerVi
 
                     popupMenu.show();
 
-                    try {
-                        String token = tokenManager.getJwtToken().toString();
-                        Map<String, String> data = new HashMap<String, String>();
-                        data.put("username", username);
-                        data.put("role", role);
-                        data.put("token", token);
-
-                        reqObj = new ReqObj(data);
-                        Future<Object> res = RequestHandler.postJson(reqObj, "director/updateuserrole");
-
-                    } catch(Exception e) {
-                        Toast.makeText(holder.button.getContext(), "¿Esos son reebok o son nike?", Toast.LENGTH_SHORT).show();
-                        System.out.println(e);
-                    }
-
                 }
             });
-
         // Below set the profile picture. Ignore for now
         // holder.imageView.setImageResource(userRightsModels.get(position).getImage());
     }
