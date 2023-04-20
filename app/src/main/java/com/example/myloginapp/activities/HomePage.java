@@ -3,8 +3,10 @@ package com.example.myloginapp.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -25,6 +27,7 @@ import android.widget.Button;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Future;
+import java.lang.Integer;
 
 public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
@@ -58,18 +61,36 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        /*------------------request setup------------*/
+        String token = tokenManager.getJwtToken().toString();
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("token", tokenManager.getJwtToken());
+        ReqObj obj = new ReqObj(data);
+
+        /*-----------------------Token amount display------------------*/
+        TextView tokenTextView = findViewById(R.id.tokenText);
+
+        try {
+            Future<Object> res = RequestHandler.postJson(obj, "account/info");
+            Map<String, Object> resMap = (Map<String, Object>) res.get();
+            Map<String, Object> objMap = (Map<String, Object>) resMap.get("response");
+            double tokens = (double) objMap.get("tokens");
+            tokenTextView.setText("Tokens: " + (int) tokens);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+
 
         Redeembutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 try {
-                    String token = tokenManager.getJwtToken().toString();
-                    Map<String, String> data = new HashMap<String, String>();
-                    data.put("token", tokenManager.getJwtToken());
-                    System.out.println(token);
-                    ReqObj obj = new ReqObj(data);
-                    Future<Object> res = RequestHandler.postJson(obj, "tokens/redeem");
+                    Future<Object> redeemRes = RequestHandler.postJson(obj, "tokens/redeem");
+                    Map<String, Object> redeemResMap = (Map<String, Object>) redeemRes.get();
+                    System.out.println(redeemResMap);
+                    double tokens = (double) redeemResMap.get("response");
+                    tokenTextView.setText("Tokens: " + (int) tokens);
                 } catch(Exception e) {
                     Toast.makeText(HomePage.this, "Error redeeming token!", Toast.LENGTH_SHORT).show();
                     System.out.println(e);
