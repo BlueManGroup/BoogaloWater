@@ -135,7 +135,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(intent2);
                 break;
             case R.id.menuLogout:
-                Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Login out", Toast.LENGTH_SHORT).show();
                 Intent intent3 = new Intent(HomePage.this, LoginPage.class);
                 startActivity(intent3);
                 break;

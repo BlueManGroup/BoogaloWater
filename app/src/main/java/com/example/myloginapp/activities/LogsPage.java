@@ -142,7 +142,7 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.menuLogs:
                 break;
             case R.id.menuLogout:
-                Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Login out", Toast.LENGTH_SHORT).show();
                 Intent intent3 = new Intent(LogsPage.this, LoginPage.class);
                 startActivity(intent3);
                 break;

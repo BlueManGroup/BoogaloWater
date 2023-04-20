@@ -140,7 +140,7 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
                 startActivity(intent2);
                 break;
             case R.id.menuLogout:
-                Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Login out", Toast.LENGTH_SHORT).show();
                 Intent intent3 = new Intent(UserRightsPage.this, LoginPage.class);
                 startActivity(intent3);
                 break;
