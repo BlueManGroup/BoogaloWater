@@ -2,62 +2,56 @@ package com.example.myloginapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.myloginapp.R;
-import com.example.myloginapp.models.CurrentUser;
-import com.example.myloginapp.models.LogsModel;
+import com.example.myloginapp.adapters.TDP_RecyclerViewAdapter;
+import com.example.myloginapp.models.TokenDistributionModel;
 import com.example.myloginapp.models.UserRightsModel;
-import com.example.myloginapp.utilities.RequestHandler;
-import com.example.myloginapp.utilities.TokenManager;
-import com.example.myloginapp.models.ReqObj;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.example.myloginapp.utilities.RequestHandler;
+import com.example.myloginapp.utilities.TokenManager;
+import com.example.myloginapp.models.ReqObj;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.Map;
+import java.util.ArrayList;
 
-public class LogsPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+public class TokenDistributionPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
     TokenManager tokenManager;
-    String token;
 
-    String urlStr;
-
-    String[] actions = {"change user rights","redeem","distribute"};
-
-    CurrentUser currentUser;
+    ArrayList<TokenDistributionModel> tokenDistributionModels = new ArrayList<>();
+    
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        tokenManager = new TokenManager(this);
-
-        currentUser = new CurrentUser();
-
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_distribution_page);
 
         /*------------------------Hooks----------------------------------------*/
-        drawerLayout = findViewById(R.id.drawerHomePage);
+        drawerLayout = findViewById(R.id.tokenDistributionPage);
         navigationView = findViewById(R.id.navigationView);
-
-        toolbar = findViewById(R.id.home_page_toolbar);
+        toolbar = findViewById(R.id.token_distribution_page_toolbar);
         navigationView.setItemIconTintList(null);
 
         /*------------------------Toolbar----------------------------------------*/
@@ -70,44 +64,44 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        /*------------------------Recycler View----------------------------*/
+        RecyclerView recyclerView = findViewById(R.id.tokenRecyclerView);
 
-        /*----------------------Get Logs------------------------------------------*/
+        setUpTokenDistributionModel();
 
-        token = tokenManager.getJwtToken();
+        TDP_RecyclerViewAdapter adapter = new TDP_RecyclerViewAdapter(this, tokenDistributionModels);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+    }
 
-
+    private void setUpTokenDistributionModel() {
+        // Get an array of all usernames and their corresponding token assets.
+        tokenManager = new TokenManager(this);
 
         Map<String, String> data = new HashMap<String, String>();
-        data.put("token", token);
-        data.put("action",actions.toString()); // tager den her hele arrayet som en string? backenden fetcher allerede alt, hvis man passer null
+        data.put("token", tokenManager.getJwtToken());
+
         ReqObj obj = new ReqObj(data);
 
-        if(currentUser.getRole() == "director") {
-            urlStr = "director/log";
-        } else {
-            urlStr = "account/log";
-        }
-
-        Future<Object> res = RequestHandler.postJson(obj,urlStr);
-
         try {
+            Future<Object> res = RequestHandler.postJson(obj, "director/tokens");
             Map<String, Object> resMap = (Map<String, Object>) res.get(); // Get the response object from future object. Output: {bool: , data: [{},{},...]}
             // The response objects 'data'-field contains an array with objects. One for each user
             // containing the username and the role of the user.
             // It is unpacked like this:
-            ArrayList<Map<String, Object>> dataMap = (ArrayList<Map<String, Object>>) resMap.get("data"); // Get the array from 'data'-field. Output: [{username: , role: },{},... ]
-
+            ArrayList<Map<String, String>> dataMap = (ArrayList<Map<String, String>>) resMap.get("response"); // Get the array from 'data'-field. Output: [{username: , role: },{},... ]
             // Goes through the items in dataMap, which is an array of Map-objects, to store
-            // their data in a UserRightsModel, so that it can be used by the recycler view.
-            for (Map<String, Object> dataObj : dataMap) {
-               // logsModel.add(dataMap);
+            // their data in a TokenDistributionModel, so that it can be used by the recycler view.
+            for (Map<String, String> dataObj : dataMap) {
+                tokenDistributionModels.add(new TokenDistributionModel(dataObj.get("username"), dataObj.get("tokens").toString()));
             }
 
         } catch (Exception e) {
-            Toast.makeText(LogsPage.this, "Error while loading the user rights page!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(TokenDistributionPage.this, "Error while loading the token distribution page!", Toast.LENGTH_SHORT).show();
             System.out.println(e);
         }
+
     }
 
     /*------------------------Navigation Drawer Menu ----------------------------*/
@@ -127,7 +121,7 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
         switch (menuItem.getItemId()) {
             case R.id.menuHome:
                 Toast.makeText(this, "Switching to Home Page", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LogsPage.this, HomePage.class);
+                Intent intent = new Intent(TokenDistributionPage.this, HomePage.class);
                 startActivity(intent);
                 break;
             case R.id.menuTokens:
@@ -135,22 +129,19 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.menuTokenDistribution:
                 break;
             case R.id.menuUserRights:
-                Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(LogsPage.this, UserRightsPage.class);
-                startActivity(intent2);
                 break;
             case R.id.menuLogs:
+                Toast.makeText(this, "Switching to Logs Page", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(TokenDistributionPage.this, LogsPage.class);
+                startActivity(intent2);
                 break;
             case R.id.menuLogout:
                 Toast.makeText(this, "Login out", Toast.LENGTH_SHORT).show();
-                Intent intent3 = new Intent(LogsPage.this, LoginPage.class);
+                Intent intent3 = new Intent(TokenDistributionPage.this, LoginPage.class);
                 startActivity(intent3);
                 break;
         }
         return true;
     }
 }
-
-
-
 

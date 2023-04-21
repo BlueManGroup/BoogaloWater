@@ -78,8 +78,6 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
         tokenManager = new TokenManager(this);
 
         Map<String, String> data = new HashMap<String, String>();
-        data.put("username", "NULL");
-        data.put("password", "NULL");
         data.put("token", tokenManager.getJwtToken());
 
         ReqObj obj = new ReqObj(data);

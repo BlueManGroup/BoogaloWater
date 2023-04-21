@@ -123,6 +123,9 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.menuTokens:
                 break;
             case R.id.menuTokenDistribution:
+                Toast.makeText(this, "Switching to Logs Page", Toast.LENGTH_SHORT).show();
+                Intent intent4 = new Intent(HomePage.this, TokenDistributionPage.class);
+                startActivity(intent4);
                 break;
             case R.id.menuUserRights:
                 Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
