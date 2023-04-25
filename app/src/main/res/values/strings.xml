@@ -36,8 +36,9 @@
 
     <string name="redeem_drink">Redeem drink</string>
 
-    <string name="updated_user">Updated User</string>
-    <string name="role">Role</string>
-    <string name="Recipient">Recepient</string>
+    <string name="updated_user">Updated User:</string>
+    <string name="role">Role:</string>
+    <string name="Recipient">Recepient:</string>
+    <string name="tokenInt">Tokens:</string>
 
 </resources>

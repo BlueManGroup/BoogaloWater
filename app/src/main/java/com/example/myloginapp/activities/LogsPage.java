@@ -10,6 +10,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.myloginapp.R;
+import com.example.myloginapp.adapters.LogAdapter;
+import com.example.myloginapp.adapters.URP_RecyclerViewAdapter;
 import com.example.myloginapp.models.CurrentUser;
 import com.example.myloginapp.models.LogsModel;
 import com.example.myloginapp.models.UserRightsModel;
@@ -21,11 +23,14 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -38,7 +43,7 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
     String urlStr;
     String[] actions = {"change user rights","redeem","distribute"};
     CurrentUser currentUser;
-
+    ArrayList<LogsModel> logsModels = new ArrayList<>();
 
 
     @Override
@@ -49,13 +54,13 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_logs_page);
 
         /*------------------------Hooks----------------------------------------*/
-        drawerLayout = findViewById(R.id.drawerHomePage);
+        drawerLayout = findViewById(R.id.drawerLogsPage);
         navigationView = findViewById(R.id.navigationView);
 
-        toolbar = findViewById(R.id.home_page_toolbar);
+        toolbar = findViewById(R.id.logs_page_toolbar);
         navigationView.setItemIconTintList(null);
 
         /*------------------------Toolbar----------------------------------------*/
@@ -71,6 +76,17 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
 
         /*----------------------Get Logs------------------------------------------*/
 
+
+        /*------------------------Recycler View----------------------------*/
+        RecyclerView recyclerView = findViewById(R.id.logRecyclerView);
+
+        setUpLogsModels();
+
+        LogAdapter adapter = new LogAdapter(this, logsModels);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+    private void setUpLogsModels() {
         token = tokenManager.getJwtToken();
 
 
@@ -81,7 +97,7 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
         data.put("action",actions.toString());
         ReqObj obj = new ReqObj(data);
 
-        if(currentUser.getRole() == "director") {
+        if(Objects.equals(currentUser.getRole(), "director")) {
             urlStr = "director/log";
         } else {
             urlStr = "account/log";
@@ -94,10 +110,26 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
             // The response objects 'data'-field contains an array with objects. One for each user
             // containing the username and the role of the user.
             // It is unpacked like this:
+
+
+
             ArrayList<Map<String, Object>> dataMap = (ArrayList<Map<String, Object>>) resMap.get("response"); // Get the array from 'data'-field. Output: [{username: , role: },{},... ]
 
             // Goes through the items in dataMap, which is an array of Map-objects, to store
             // their data in a UserRightsModel, so that it can be used by the recycler view.
+            System.out.println(dataMap);
+            Integer i = 0;
+            assert dataMap != null;
+            for (Map<String, Object> dataObj : dataMap) {
+                System.out.print("create object");
+                System.out.println(i);
+                logsModels.add(new LogsModel(dataObj));
+                i++;
+            }
+
+
+
+
 
 
         } catch (Exception e) {
@@ -117,6 +149,9 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
             super.onBackPressed();
         }
     }
+
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
