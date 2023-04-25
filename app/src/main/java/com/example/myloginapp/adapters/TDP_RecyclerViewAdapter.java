@@ -71,7 +71,7 @@ public class TDP_RecyclerViewAdapter extends RecyclerView.Adapter<TDP_RecyclerVi
                 @Override
                 public void onClick(View v) {
                     tokenManager = new TokenManager(v.getContext());
-
+                    System.out.println("hello");
 
                     try {
                         String token = tokenManager.getJwtToken().toString();
@@ -87,7 +87,7 @@ public class TDP_RecyclerViewAdapter extends RecyclerView.Adapter<TDP_RecyclerVi
                         Toast.makeText(holder.button.getContext(), "Esos son reebok o son nike?", Toast.LENGTH_SHORT).show();
                         System.out.println(e);
                     }
-                    holder.button.setText("responsible");
+
 
                 }
 
