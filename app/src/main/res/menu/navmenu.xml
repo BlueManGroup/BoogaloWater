@@ -12,6 +12,10 @@
             android:icon="@drawable/ic_baseline_person_24"
             android:title="TokenDistribution" />
         <item
+            android:id="@+id/menuTokens"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="Tokens" />
+        <item
             android:id="@+id/menuUserRights"
             android:icon="@drawable/ic_baseline_person_24"
             android:title="UserRights" />
@@ -26,3 +30,4 @@
 
     </group>
 </menu>
+
