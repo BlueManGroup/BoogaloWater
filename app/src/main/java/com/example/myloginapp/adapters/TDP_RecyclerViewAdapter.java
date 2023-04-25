@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Future;
 import com.example.myloginapp.utilities.TokenManager;
+import com.example.myloginapp.utilities.TotalTokensHandler;
 
 public class TDP_RecyclerViewAdapter extends RecyclerView.Adapter<TDP_RecyclerViewAdapter.MyViewHolder> {
     Context context;
@@ -41,8 +42,6 @@ public class TDP_RecyclerViewAdapter extends RecyclerView.Adapter<TDP_RecyclerVi
         this.context = context;
         this.tokenDistributionModels = tokenDistributionModels;
         tokenManager = new TokenManager(context);
-        System.out.println(this.tokenDistributionModels);
-
     }
 
     @NonNull
@@ -51,7 +50,6 @@ public class TDP_RecyclerViewAdapter extends RecyclerView.Adapter<TDP_RecyclerVi
         // This method inflates the layout, i.e. gives it its look.
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recycler_view_distribution, parent, false);
-
         return new TDP_RecyclerViewAdapter.MyViewHolder(view);
     }
 
@@ -61,9 +59,9 @@ public class TDP_RecyclerViewAdapter extends RecyclerView.Adapter<TDP_RecyclerVi
         // based on the position of the recycler view.
         String username = tokenDistributionModels.get(position).getUsername();
         String amount = tokenDistributionModels.get(position).getAmount();
-
         holder.usernameTextView.setText(username);
         holder.tokenAmountTextView.setText(amount + " tokens");
+
         // Below set the profile picture. Ignore for now
         // holder.imageView.setImageResource(userRightsModels.get(position).getImage());
 
@@ -71,8 +69,7 @@ public class TDP_RecyclerViewAdapter extends RecyclerView.Adapter<TDP_RecyclerVi
                 @Override
                 public void onClick(View v) {
                     tokenManager = new TokenManager(v.getContext());
-                    System.out.println("hello");
-
+                    TotalTokensHandler totalTokensHandler = new TotalTokensHandler();
                     try {
                         String token = tokenManager.getJwtToken().toString();
                         Map<String, String> data = new HashMap<String, String>();
@@ -88,14 +85,15 @@ public class TDP_RecyclerViewAdapter extends RecyclerView.Adapter<TDP_RecyclerVi
                         Map<String, Double> resMap = (Map<String, Double>) res.get();
                         //Map<String, Object> dataMap = (Map<String, Object>) resMap.get("response");
                         int amount = resMap.get("response").intValue();
-                        System.out.println(amount);
+                        totalTokensHandler.setTotalTokensText(tokenManager);
                         holder.tokenAmountTextView.setText(amount + " tokens");
+
+
 
                     } catch(Exception e) {
                         Toast.makeText(holder.button.getContext(), "Esos son reebok o son nike?", Toast.LENGTH_SHORT).show();
                         System.out.println(e);
                     }
-
 
                 }
 
@@ -108,7 +106,6 @@ public class TDP_RecyclerViewAdapter extends RecyclerView.Adapter<TDP_RecyclerVi
         // This method tells the recyclerView how many items it has to display.
         return tokenDistributionModels.size();
     }
-
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         //ImageView imageView; // Will eventually hold the profile picture.
         TextView usernameTextView;

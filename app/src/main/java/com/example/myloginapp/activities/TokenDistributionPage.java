@@ -11,6 +11,7 @@ import com.example.myloginapp.R;
 import com.example.myloginapp.adapters.TDP_RecyclerViewAdapter;
 import com.example.myloginapp.models.TokenDistributionModel;
 import com.example.myloginapp.models.UserRightsModel;
+import com.example.myloginapp.utilities.TotalTokensHandler;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.core.view.GravityCompat;
@@ -38,6 +39,7 @@ public class TokenDistributionPage extends AppCompatActivity implements Navigati
     NavigationView navigationView;
     Toolbar toolbar;
     TokenManager tokenManager;
+    TotalTokensHandler totalTokensHandler;
 
     ArrayList<TokenDistributionModel> tokenDistributionModels = new ArrayList<>();
     
@@ -53,7 +55,7 @@ public class TokenDistributionPage extends AppCompatActivity implements Navigati
         navigationView = findViewById(R.id.navigationView);
         toolbar = findViewById(R.id.token_distribution_page_toolbar);
         navigationView.setItemIconTintList(null);
-
+        totalTokensHandler = new TotalTokensHandler(findViewById(R.id.totalTokenAmount));
         /*------------------------Toolbar----------------------------------------*/
         setSupportActionBar(toolbar);
 
@@ -78,6 +80,7 @@ public class TokenDistributionPage extends AppCompatActivity implements Navigati
     private void setUpTokenDistributionModel() {
         // Get an array of all usernames and their corresponding token assets.
         tokenManager = new TokenManager(this);
+        totalTokensHandler.setTotalTokensText(tokenManager);
 
         Map<String, String> data = new HashMap<String, String>();
         data.put("token", tokenManager.getJwtToken());

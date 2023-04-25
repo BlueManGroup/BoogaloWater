@@ -9,7 +9,7 @@ public class CurrentUser {
         CurrentUser.role = role;
     }
 
-    public  CurrentUser() {
+    public CurrentUser() {
 
     }
 
