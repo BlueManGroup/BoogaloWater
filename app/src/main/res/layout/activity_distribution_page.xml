@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/tokenDistributionPage"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawerHomePage"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.HomePage"
+    tools:context=".activities.TokenDistributionPage"
     android:fitsSystemWindows ="true"
-    >
+    tools:openDrawer="start">
 
-    <!-- Here is the Navigation View -->
+    <!-- Here is the toolbar on top -->
     <com.google.android.material.navigation.NavigationView
-
         android:id= "@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -25,7 +25,7 @@
 
         <!-- Here is the toolbar on top -->
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/home_page_toolbar"
+            android:id="@+id/token_distribution_page_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@color/funRed"
@@ -36,49 +36,30 @@
             android:orientation="horizontal"
             >
 
-
-            <!-- This is the text for Home Page -->
+            <!-- This is the text for UserRights Page -->
             <TextView
                 android:id ="@+id/textTitle"
                 android:layout_height="match_parent"
                 android:layout_width ="match_parent"
-                android:layout_marginStart ="10dp"
-                android:text="@string/home_page"
+                android:layout_marginStart ="15dp"
+                android:text="Distribution"
                 android:textColor="@color/white"
                 android:textSize ="35sp"
                 android:gravity ="center"/>
         </androidx.appcompat.widget.Toolbar>
 
-
-        <Button
-            android:id="@+id/redeemButton"
-            android:layout_width="114dp"
-            android:layout_height="69dp"
-            android:text="Redeem Token"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tokenRecyclerView"
+            android:layout_width="409dp"
+            android:layout_height="673dp"
+            android:backgroundTint="@color/grey"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_page_toolbar"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toBottomOf="@+id/token_distribution_page_toolbar" />
 
-        <TextView
-            android:id="@+id/tokenText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="149dp"
-            android:layout_marginTop="192dp"
-            android:layout_marginEnd="155dp"
-            android:layout_marginBottom="25dp"
-            android:text="piss"
-            android:textSize="70sp"
-            app:layout_constraintBottom_toTopOf="@+id/redeemButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_page_toolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </androidx.drawerlayout.widget.DrawerLayout>
 
