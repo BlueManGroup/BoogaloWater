@@ -36,6 +36,12 @@
 
     <string name="redeem_drink">Redeem drink</string>
 
+
+    <string name="updated_user">Updated User:</string>
+    <string name="role">Role:</string>
+    <string name="Recipient">Recepient:</string>
+    <string name="tokenInt">Tokens:</string>
+
     <string name="distribution_text_standard">0 tokens</string>
 
     <string name="distribution_button_text"> Distribute</string>
@@ -45,5 +51,6 @@
         <item> Responsible </item>
         <item> Director </item>
     </string-array>
+
 
 </resources>

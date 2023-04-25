@@ -11,5 +11,6 @@
     <color name="grey">#808080</color>
     <color name="light_grey">#F1F1F1</color>
     <color name="funRed"> #EE1E25</color>
+    <color name="logs">#DDC6C6</color>
 
 </resources>
