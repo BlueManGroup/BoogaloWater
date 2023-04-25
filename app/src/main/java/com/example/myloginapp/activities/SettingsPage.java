@@ -54,8 +54,6 @@ public class SettingsPage extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(SettingsPage.this, HomePage.class);
                 startActivity(intent);
                 break;
-            case R.id.menuTokens:
-                break;
             case R.id.menuTokenDistribution:
                 break;
             case R.id.menuUserRights:

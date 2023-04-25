@@ -126,8 +126,6 @@ public class LogsPage extends AppCompatActivity implements NavigationView.OnNavi
                 Intent intent = new Intent(LogsPage.this, HomePage.class);
                 startActivity(intent);
                 break;
-            case R.id.menuTokens:
-                break;
             case R.id.menuTokenDistribution:
                 break;
             case R.id.menuUserRights:

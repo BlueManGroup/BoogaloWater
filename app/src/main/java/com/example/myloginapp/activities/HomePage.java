@@ -99,8 +99,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         switch (menuItem.getItemId()) {
             case R.id.menuHome:
                 break;
-            case R.id.menuTokens:
-                break;
             case R.id.menuTokenDistribution:
                 break;
             case R.id.menuUserRights:
