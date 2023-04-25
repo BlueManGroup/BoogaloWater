@@ -63,7 +63,7 @@ public class TDP_RecyclerViewAdapter extends RecyclerView.Adapter<TDP_RecyclerVi
         String amount = tokenDistributionModels.get(position).getAmount();
 
         holder.usernameTextView.setText(username);
-        holder.tokenAmountTextView.setText(amount + "tokens");
+        holder.tokenAmountTextView.setText(amount + " tokens");
         // Below set the profile picture. Ignore for now
         // holder.imageView.setImageResource(userRightsModels.get(position).getImage());
 
@@ -82,6 +82,14 @@ public class TDP_RecyclerViewAdapter extends RecyclerView.Adapter<TDP_RecyclerVi
 
                         reqObj = new ReqObj(data);
                         Future<Object> res = RequestHandler.postJson(reqObj, "tokens/create");
+
+                        //getting user total token amount
+
+                        Map<String, Double> resMap = (Map<String, Double>) res.get();
+                        //Map<String, Object> dataMap = (Map<String, Object>) resMap.get("response");
+                        int amount = resMap.get("response").intValue();
+                        System.out.println(amount);
+                        holder.tokenAmountTextView.setText(amount + " tokens");
 
                     } catch(Exception e) {
                         Toast.makeText(holder.button.getContext(), "Esos son reebok o son nike?", Toast.LENGTH_SHORT).show();
