@@ -78,8 +78,6 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
         tokenManager = new TokenManager(this);
 
         Map<String, String> data = new HashMap<String, String>();
-        data.put("username", "NULL");
-        data.put("password", "NULL");
         data.put("token", tokenManager.getJwtToken());
 
         ReqObj obj = new ReqObj(data);
@@ -90,7 +88,8 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
             // The response objects 'data'-field contains an array with objects. One for each user
             // containing the username and the role of the user.
             // It is unpacked like this:
-            ArrayList<Map<String, Object>> dataMap = (ArrayList<Map<String, Object>>) resMap.get("data"); // Get the array from 'data'-field. Output: [{username: , role: },{},... ]
+            System.out.println(resMap);
+            ArrayList<Map<String, Object>> dataMap = (ArrayList<Map<String, Object>>) resMap.get("response"); // Get the array from 'data'-field. Output: [{username: , role: },{},... ]
 
             // Goes through the items in dataMap, which is an array of Map-objects, to store
             // their data in a UserRightsModel, so that it can be used by the recycler view.
@@ -137,7 +136,7 @@ public class UserRightsPage extends AppCompatActivity implements NavigationView.
                 startActivity(intent2);
                 break;
             case R.id.menuLogout:
-                Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Login out", Toast.LENGTH_SHORT).show();
                 Intent intent3 = new Intent(UserRightsPage.this, LoginPage.class);
                 startActivity(intent3);
                 break;

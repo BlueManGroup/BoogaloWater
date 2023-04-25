@@ -44,7 +44,10 @@
             android:name=".activities.LogsPage"
             android:exported="true">
         </activity>
-
+        <activity
+            android:name=".activities.TokenDistributionPage"
+            android:exported="true">
+        </activity>
 
     </application>
 

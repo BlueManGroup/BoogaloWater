@@ -36,4 +36,14 @@
 
     <string name="redeem_drink">Redeem drink</string>
 
+    <string name="distribution_text_standard">0 tokens</string>
+
+    <string name="distribution_button_text"> Distribute</string>
+
+    <string-array name="user_roles" >
+        <item> User </item>
+        <item> Responsible </item>
+        <item> Director </item>
+    </string-array>
+
 </resources>
