@@ -33,7 +33,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-    Button Redeembutton;
+    Button RedeemButton;
     TokenManager tokenManager;
 
     @Override
@@ -48,7 +48,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         navigationView = findViewById(R.id.navigationView);
 
         toolbar = findViewById(R.id.home_page_toolbar);
-        Redeembutton = findViewById(R.id.redeemButton);
+        RedeemButton = findViewById(R.id.redeemButton);
         navigationView.setItemIconTintList(null);
 
         /*------------------------Toolbar----------------------------------------*/
@@ -81,7 +81,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         }
 
 
-        Redeembutton.setOnClickListener(new View.OnClickListener() {
+        RedeemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -121,24 +121,29 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.menuHome:
                 break;
             case R.id.menuTokenDistribution:
-                Toast.makeText(this, "Switching to Logs Page", Toast.LENGTH_SHORT).show();
-                Intent intent4 = new Intent(HomePage.this, TokenDistributionPage.class);
-                startActivity(intent4);
+                Toast.makeText(this, "Switching to Token Distribution Page", Toast.LENGTH_SHORT).show();
+                Intent toDistrIntent = new Intent(HomePage.this, TokenDistributionPage.class);
+                startActivity(toDistrIntent);
                 break;
             case R.id.menuUserRights:
                 Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomePage.this, UserRightsPage.class);
-                startActivity(intent);
+                Intent toUsrRightsIntent = new Intent(HomePage.this, UserRightsPage.class);
+                startActivity(toUsrRightsIntent);
                 break;
             case R.id.menuLogs:
-                Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(HomePage.this, LogsPage.class);
-                startActivity(intent2);
+                Toast.makeText(this, "Switching to Logs Page", Toast.LENGTH_SHORT).show();
+                Intent toLogsIntent = new Intent(HomePage.this, LogsPage.class);
+                startActivity(toLogsIntent);
+                break;
+            case R.id.menuSettings:
+                Toast.makeText(this, "Switching to Settings Page", Toast.LENGTH_SHORT).show();
+                Intent toSettingsIntent = new Intent(HomePage.this, SettingsPage.class);
+                startActivity(toSettingsIntent);
                 break;
             case R.id.menuLogout:
-                Toast.makeText(this, "Login out", Toast.LENGTH_SHORT).show();
-                Intent intent3 = new Intent(HomePage.this, LoginPage.class);
-                startActivity(intent3);
+                Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show();
+                Intent toLogoutIntent = new Intent(HomePage.this, LoginPage.class);
+                startActivity(toLogoutIntent);
                 break;
         }
         return true;

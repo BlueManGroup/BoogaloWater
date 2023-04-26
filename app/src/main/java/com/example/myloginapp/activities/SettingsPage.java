@@ -51,22 +51,30 @@ public class SettingsPage extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
             case R.id.menuHome:
                 Toast.makeText(this, "Switching to Home Page", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SettingsPage.this, HomePage.class);
-                startActivity(intent);
+                Intent toHomeIntent = new Intent(SettingsPage.this, HomePage.class);
+                startActivity(toHomeIntent);
                 break;
             case R.id.menuTokenDistribution:
+                Toast.makeText(this, "Switching to Token Distribution Page", Toast.LENGTH_SHORT).show();
+                Intent toDistrIntent = new Intent(SettingsPage.this, TokenDistributionPage.class);
+                startActivity(toDistrIntent);
                 break;
             case R.id.menuUserRights:
+                Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
+                Intent toUsrRightsIntent = new Intent(SettingsPage.this, UserRightsPage.class);
+                startActivity(toUsrRightsIntent);
                 break;
             case R.id.menuLogs:
                 Toast.makeText(this, "Switching to Logs Page", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(SettingsPage.this, LogsPage.class);
-                startActivity(intent2);
+                Intent toLogsIntent = new Intent(SettingsPage.this, LogsPage.class);
+                startActivity(toLogsIntent);
+                break;
+            case R.id.menuSettings:
                 break;
             case R.id.menuLogout:
-                Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
-                Intent intent3 = new Intent(SettingsPage.this, LoginPage.class);
-                startActivity(intent3);
+                Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show();
+                Intent toLogoutIntent = new Intent(SettingsPage.this, LoginPage.class);
+                startActivity(toLogoutIntent);
                 break;
         }
         return true;
