@@ -51,7 +51,7 @@ public class SignUpPage extends AppCompatActivity {
 
                 try {
                     Map<String, Object> resMap = (Map<String, Object>) res.get();
-                    token = (String) resMap.get("token");
+                    token = (String) resMap.get("response");
                     if (token == null) throw new Exception("fuck");
                     tokenManager.saveJwtToken(token);
 
