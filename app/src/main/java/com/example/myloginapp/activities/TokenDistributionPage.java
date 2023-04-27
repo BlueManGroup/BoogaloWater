@@ -124,24 +124,33 @@ public class TokenDistributionPage extends AppCompatActivity implements Navigati
         switch (menuItem.getItemId()) {
             case R.id.menuHome:
                 Toast.makeText(this, "Switching to Home Page", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(TokenDistributionPage.this, HomePage.class);
-                startActivity(intent);
-                break;
-            case R.id.menuTokens:
+                Intent toHomeIntent = new Intent(TokenDistributionPage.this, HomePage.class);
+                startActivity(toHomeIntent);
                 break;
             case R.id.menuTokenDistribution:
+                Toast.makeText(this, "Switching to Token Distribution Page", Toast.LENGTH_SHORT).show();
+                Intent toDistrIntent = new Intent(TokenDistributionPage.this, TokenDistributionPage.class);
+                startActivity(toDistrIntent);
                 break;
             case R.id.menuUserRights:
+                Toast.makeText(this, "Switching to User Rights", Toast.LENGTH_SHORT).show();
+                Intent toUsrRightsIntent = new Intent(TokenDistributionPage.this, UserRightsPage.class);
+                startActivity(toUsrRightsIntent);
                 break;
             case R.id.menuLogs:
                 Toast.makeText(this, "Switching to Logs Page", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(TokenDistributionPage.this, LogsPage.class);
-                startActivity(intent2);
+                Intent toLogsIntent = new Intent(TokenDistributionPage.this, LogsPage.class);
+                startActivity(toLogsIntent);
+                break;
+            case R.id.menuSettings:
+                Toast.makeText(this, "Switching to Settings Page", Toast.LENGTH_SHORT).show();
+                Intent toSettingsIntent = new Intent(TokenDistributionPage.this, SettingsPage.class);
+                startActivity(toSettingsIntent);
                 break;
             case R.id.menuLogout:
-                Toast.makeText(this, "Login out", Toast.LENGTH_SHORT).show();
-                Intent intent3 = new Intent(TokenDistributionPage.this, LoginPage.class);
-                startActivity(intent3);
+                Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show();
+                Intent toLogoutIntent = new Intent(TokenDistributionPage.this, LoginPage.class);
+                startActivity(toLogoutIntent);
                 break;
         }
         return true;
