@@ -2,6 +2,13 @@ package com.example.myloginapp.utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.security.keystore.KeyGenParameterSpec;
+import android.security.keystore.KeyProperties;
+import android.util.Base64;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKeys;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 public class TokenManager {
 
@@ -11,7 +18,18 @@ public class TokenManager {
     private SharedPreferences sharedPreferences;
 
     public TokenManager(Context context) {
-        this.sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        try {
+            String masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
+            sharedPreferences = EncryptedSharedPreferences.create(
+                    SHARED_PREF_NAME,
+                    masterKeyAlias,
+                    context,
+                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            );
+        } catch (GeneralSecurityException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveJwtToken(String jwtToken) {
@@ -29,5 +47,4 @@ public class TokenManager {
         editor.remove(KEY_JWT_TOKEN);
         editor.apply();
     }
-
 }
